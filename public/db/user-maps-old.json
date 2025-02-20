@@ -1,0 +1,486 @@
+[
+    {
+        "id": "95904d3f-0000-0190-d7ba-d27353eccb92",
+        "client": {
+            "id": "9246eae2-0000-0190-8204-8b3403488ce7",
+            "idRef": "DD2DC0A311F64EF28FD06D4C970581E1",
+            "name": "PANCARAN DARAT TRANSPORT",
+            "url": "pancaran-darat-transport"
+        },
+        "company": {
+            "id": "9246eaf7-0000-0190-59e1-0d1f806c95d5",
+            "idRef": "72F81F82FB0F4FE49D0F12EA110118C8",
+            "name": "BDP INDONESIA",
+            "url": "bdp-indonesia"
+        },
+        "credential": {
+            "id": "9247ee87-0000-0190-4906-777c381a648a",
+            "role": "admin",
+            "position": "Admin Billing",
+            "abilities": [
+                {
+                    "id": "9248eb5a-0000-0190-1ba8-b4799ed57d61",
+                    "action": "manage",
+                    "subject": "AdminInvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9248eb5d-0000-0190-6266-d72b297178af",
+                    "action": "manage",
+                    "subject": "AdminInvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9248eb5f-0000-0190-3983-f4e3f593015e",
+                    "action": "manage",
+                    "subject": "AdminInvoicePaidOff"
+                },
+                {
+                    "id": "9248eb61-0000-0190-9b15-3deaba25ecae",
+                    "action": "manage",
+                    "subject": "AdminInvoicePreview"
+                }
+            ]
+        },
+        "isDefault": true,
+        "sessionActive": true
+    },
+    {
+        "id": "a1364d71-0000-0190-5b90-869449f8a59d",
+        "client": {
+            "id": "9246eae2-0000-0190-8204-8b3403488ce7",
+            "idRef": "DD2DC0A311F64EF28FD06D4C970581E1",
+            "name": "PANCARAN DARAT TRANSPORT",
+            "url": "pancaran-darat-transport"
+        },
+        "company": {
+            "id": "9246eae6-0000-0190-7062-65ec45ed209b",
+            "idRef": "B2B35B9B11754DF6A310C3DB6393BCBB",
+            "name": "PANCARAN LOGISTIK INDONESIA (PLI)",
+            "url": "pancaran-logistik-indonesia-pli"
+        },
+        "credential": {
+            "id": "9247ee87-0000-0190-4906-777c381a648a",
+            "role": "admin",
+            "position": "Admin Billing",
+            "abilities": [
+                {
+                    "id": "9248eb5a-0000-0190-1ba8-b4799ed57d61",
+                    "action": "manage",
+                    "subject": "AdminInvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9248eb5d-0000-0190-6266-d72b297178af",
+                    "action": "manage",
+                    "subject": "AdminInvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9248eb5f-0000-0190-3983-f4e3f593015e",
+                    "action": "manage",
+                    "subject": "AdminInvoicePaidOff"
+                },
+                {
+                    "id": "9248eb61-0000-0190-9b15-3deaba25ecae",
+                    "action": "manage",
+                    "subject": "AdminInvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    },
+    {
+        "id": "ba988a4f-0000-0190-9b79-086f603cd424",
+        "client": {
+            "id": "9246eae2-0000-0190-8204-8b3403488ce7",
+            "idRef": "DD2DC0A311F64EF28FD06D4C970581E1",
+            "name": "PANCARAN DARAT TRANSPORT",
+            "url": "pancaran-darat-transport"
+        },
+        "company": {
+            "id": "9246eb4d-0000-0190-049c-af1033160816",
+            "idRef": "6120450695ED4E3E81923B4049FED70B",
+            "name": "STAR ENERGY DRAJAD",
+            "url": "star-energy-drajad"
+        },
+        "credential": {
+            "id": "9247ee89-0000-0190-0f70-3bc47e330b4f",
+            "role": "billing",
+            "position": "Customer Billing",
+            "abilities": [
+                {
+                    "id": "9249d77a-0000-0190-2bc2-ac4f0b756db0",
+                    "action": "manage",
+                    "subject": "InvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9249d77c-0000-0190-733b-95253de2c197",
+                    "action": "manage",
+                    "subject": "InvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9249d77f-0000-0190-507c-6e4947dfef2d",
+                    "action": "manage",
+                    "subject": "InvoicePaidOff"
+                },
+                {
+                    "id": "9249d781-0000-0190-d17b-2df0f9779187",
+                    "action": "manage",
+                    "subject": "InvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    },
+    {
+        "id": "95904d34-0000-0190-33b1-edb9472155f7",
+        "client": {
+            "id": "9246eae2-0000-0190-8204-8b3403488ce7",
+            "idRef": "DD2DC0A311F64EF28FD06D4C970581E1",
+            "name": "PANCARAN DARAT TRANSPORT",
+            "url": "pancaran-darat-transport"
+        },
+        "company": {
+            "id": "9246eaec-0000-0190-15dd-07610ae00137",
+            "idRef": "497A372AD3734E8E874AD2E1353773DA",
+            "name": "DAMCO INDONESIA",
+            "url": "damco-indonesia"
+        },
+        "credential": {
+            "id": "9247ee87-0000-0190-4906-777c381a648a",
+            "role": "admin",
+            "position": "Admin Billing",
+            "abilities": [
+                {
+                    "id": "9248eb5a-0000-0190-1ba8-b4799ed57d61",
+                    "action": "manage",
+                    "subject": "AdminInvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9248eb5d-0000-0190-6266-d72b297178af",
+                    "action": "manage",
+                    "subject": "AdminInvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9248eb5f-0000-0190-3983-f4e3f593015e",
+                    "action": "manage",
+                    "subject": "AdminInvoicePaidOff"
+                },
+                {
+                    "id": "9248eb61-0000-0190-9b15-3deaba25ecae",
+                    "action": "manage",
+                    "subject": "AdminInvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    },
+    {
+        "id": "95904d43-0000-0190-ffb8-da58bd42d343",
+        "client": {
+            "id": "9246eb25-0000-0190-04ff-d576be1f7266",
+            "idRef": "81147DAF5C6A4B4FB47841A94AADA9F2",
+            "name": "PANCARAN ENERGI TRANSPORT",
+            "url": "pancaran-energi-transport"
+        },
+        "company": {
+            "id": "9246ee29-0000-0190-b6d5-143f85482ba8",
+            "idRef": "E0C20EEAE8F6473BAC7EB1F445BDED07",
+            "name": "PERTAMINA DRILLING SERVICE INDONESIA",
+            "url": "pertamina-drilling-service-indonesia"
+        },
+        "credential": {
+            "id": "9247ee87-0000-0190-4906-777c381a648a",
+            "role": "admin",
+            "position": "Admin Billing",
+            "abilities": [
+                {
+                    "id": "9248eb5a-0000-0190-1ba8-b4799ed57d61",
+                    "action": "manage",
+                    "subject": "AdminInvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9248eb5d-0000-0190-6266-d72b297178af",
+                    "action": "manage",
+                    "subject": "AdminInvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9248eb5f-0000-0190-3983-f4e3f593015e",
+                    "action": "manage",
+                    "subject": "AdminInvoicePaidOff"
+                },
+                {
+                    "id": "9248eb61-0000-0190-9b15-3deaba25ecae",
+                    "action": "manage",
+                    "subject": "AdminInvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    },
+    {
+        "id": "95904d47-0000-0190-71ad-8e91d1dfcc4d",
+        "client": {
+            "id": "9246eb25-0000-0190-04ff-d576be1f7266",
+            "idRef": "81147DAF5C6A4B4FB47841A94AADA9F2",
+            "name": "PANCARAN ENERGI TRANSPORT",
+            "url": "pancaran-energi-transport"
+        },
+        "company": {
+            "id": "9246eb52-0000-0190-ca6f-acb7dbca256c",
+            "idRef": "FF91E499F472468DBFF81A7F550CE45B",
+            "name": "HALLIBURTON INDONESIA",
+            "url": "halliburton-indonesia"
+        },
+        "credential": {
+            "id": "9247ee87-0000-0190-4906-777c381a648a",
+            "role": "admin",
+            "position": "Admin Billing",
+            "abilities": [
+                {
+                    "id": "9248eb5a-0000-0190-1ba8-b4799ed57d61",
+                    "action": "manage",
+                    "subject": "AdminInvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9248eb5d-0000-0190-6266-d72b297178af",
+                    "action": "manage",
+                    "subject": "AdminInvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9248eb5f-0000-0190-3983-f4e3f593015e",
+                    "action": "manage",
+                    "subject": "AdminInvoicePaidOff"
+                },
+                {
+                    "id": "9248eb61-0000-0190-9b15-3deaba25ecae",
+                    "action": "manage",
+                    "subject": "AdminInvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    },
+    {
+        "id": "95904d4c-0000-0190-3a06-6fe5b2bbb4a2",
+        "client": {
+            "id": "9246eae2-0000-0190-8204-8b3403488ce7",
+            "idRef": "DD2DC0A311F64EF28FD06D4C970581E1",
+            "name": "PANCARAN DARAT TRANSPORT",
+            "url": "pancaran-darat-transport"
+        },
+        "company": {
+            "id": "9246eb03-0000-0190-d92a-796765a5c5c7",
+            "idRef": "C7FA6E6B7AFE45A9A95DD386E05F3587",
+            "name": "PT. SOLUSI BANGUN BETON",
+            "url": "pt-solusi-bangun-beton"
+        },
+        "credential": {
+            "id": "9247ee89-0000-0190-0f70-3bc47e330b4f",
+            "role": "billing",
+            "position": "Customer Billing",
+            "abilities": [
+                {
+                    "id": "9249d77a-0000-0190-2bc2-ac4f0b756db0",
+                    "action": "manage",
+                    "subject": "InvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9249d77c-0000-0190-733b-95253de2c197",
+                    "action": "manage",
+                    "subject": "InvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9249d77f-0000-0190-507c-6e4947dfef2d",
+                    "action": "manage",
+                    "subject": "InvoicePaidOff"
+                },
+                {
+                    "id": "9249d781-0000-0190-d17b-2df0f9779187",
+                    "action": "manage",
+                    "subject": "InvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    },
+    {
+        "id": "ba988a56-0000-0190-080d-7d68662e4079",
+        "client": {
+            "id": "9246eb25-0000-0190-04ff-d576be1f7266",
+            "idRef": "81147DAF5C6A4B4FB47841A94AADA9F2",
+            "name": "PANCARAN ENERGI TRANSPORT",
+            "url": "pancaran-energi-transport"
+        },
+        "company": {
+            "id": "9246ebd5-0000-0190-d459-6e4545b70aaa",
+            "idRef": "B44D31B030FB43E683F13D246B889829",
+            "name": "SCHENKER PETROLOG UTAMA",
+            "url": "schenker-petrolog-utama"
+        },
+        "credential": {
+            "id": "9247ee89-0000-0190-0f70-3bc47e330b4f",
+            "role": "billing",
+            "position": "Customer Billing",
+            "abilities": [
+                {
+                    "id": "9249d77a-0000-0190-2bc2-ac4f0b756db0",
+                    "action": "manage",
+                    "subject": "InvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9249d77c-0000-0190-733b-95253de2c197",
+                    "action": "manage",
+                    "subject": "InvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9249d77f-0000-0190-507c-6e4947dfef2d",
+                    "action": "manage",
+                    "subject": "InvoicePaidOff"
+                },
+                {
+                    "id": "9249d781-0000-0190-d17b-2df0f9779187",
+                    "action": "manage",
+                    "subject": "InvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    },
+    {
+        "id": "ba988a1a-0000-0190-7ac0-788da846c02e",
+        "client": {
+            "id": "9246eae2-0000-0190-8204-8b3403488ce7",
+            "idRef": "DD2DC0A311F64EF28FD06D4C970581E1",
+            "name": "PANCARAN DARAT TRANSPORT",
+            "url": "pancaran-darat-transport"
+        },
+        "company": {
+            "id": "9246eb0d-0000-0190-505c-752cd355a4bc",
+            "idRef": "75E823827233425AB2A4E8B70D057C98",
+            "name": "PT Yamaha Motor",
+            "url": "pt-yamaha-motor"
+        },
+        "credential": {
+            "id": "9247ee89-0000-0190-0f70-3bc47e330b4f",
+            "role": "billing",
+            "position": "Customer Billing",
+            "abilities": [
+                {
+                    "id": "9249d77a-0000-0190-2bc2-ac4f0b756db0",
+                    "action": "manage",
+                    "subject": "InvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9249d77c-0000-0190-733b-95253de2c197",
+                    "action": "manage",
+                    "subject": "InvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9249d77f-0000-0190-507c-6e4947dfef2d",
+                    "action": "manage",
+                    "subject": "InvoicePaidOff"
+                },
+                {
+                    "id": "9249d781-0000-0190-d17b-2df0f9779187",
+                    "action": "manage",
+                    "subject": "InvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    },
+    {
+        "id": "95904d3b-0000-0190-bd19-eb41b5114e8e",
+        "client": {
+            "id": "9246eae2-0000-0190-8204-8b3403488ce7",
+            "idRef": "DD2DC0A311F64EF28FD06D4C970581E1",
+            "name": "PANCARAN DARAT TRANSPORT",
+            "url": "pancaran-darat-transport"
+        },
+        "company": {
+            "id": "9246eaf1-0000-0190-2684-e2b9daf7b3a1",
+            "idRef": "6DF5C215F97649B88E7907A9B448AFFA",
+            "name": "VALE INDONESIA, TBK  (HOLDING)",
+            "url": "vale-indonesia-tbk-holding"
+        },
+        "credential": {
+            "id": "9247ee87-0000-0190-4906-777c381a648a",
+            "role": "admin",
+            "position": "Admin Billing",
+            "abilities": [
+                {
+                    "id": "9248eb5a-0000-0190-1ba8-b4799ed57d61",
+                    "action": "manage",
+                    "subject": "AdminInvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9248eb5d-0000-0190-6266-d72b297178af",
+                    "action": "manage",
+                    "subject": "AdminInvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9248eb5f-0000-0190-3983-f4e3f593015e",
+                    "action": "manage",
+                    "subject": "AdminInvoicePaidOff"
+                },
+                {
+                    "id": "9248eb61-0000-0190-9b15-3deaba25ecae",
+                    "action": "manage",
+                    "subject": "AdminInvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    },
+    {
+        "id": "ba988a5b-0000-0190-9add-bea617c34df6",
+        "client": {
+            "id": "9246eb25-0000-0190-04ff-d576be1f7266",
+            "idRef": "81147DAF5C6A4B4FB47841A94AADA9F2",
+            "name": "PANCARAN ENERGI TRANSPORT",
+            "url": "pancaran-energi-transport"
+        },
+        "company": {
+            "id": "9246eb2d-0000-0190-0ccc-28ff7d7ec87d",
+            "idRef": "DF4DED842F9A473DBFFFCA9B8A00BE69",
+            "name": "CIKARANG INLAND PORT",
+            "url": "cikarang-inland-port"
+        },
+        "credential": {
+            "id": "9247ee89-0000-0190-0f70-3bc47e330b4f",
+            "role": "billing",
+            "position": "Customer Billing",
+            "abilities": [
+                {
+                    "id": "9249d77a-0000-0190-2bc2-ac4f0b756db0",
+                    "action": "manage",
+                    "subject": "InvoiceNeedConfirmations"
+                },
+                {
+                    "id": "9249d77c-0000-0190-733b-95253de2c197",
+                    "action": "manage",
+                    "subject": "InvoiceOutstandingPayments"
+                },
+                {
+                    "id": "9249d77f-0000-0190-507c-6e4947dfef2d",
+                    "action": "manage",
+                    "subject": "InvoicePaidOff"
+                },
+                {
+                    "id": "9249d781-0000-0190-d17b-2df0f9779187",
+                    "action": "manage",
+                    "subject": "InvoicePreview"
+                }
+            ]
+        },
+        "isDefault": false,
+        "sessionActive": false
+    }
+]

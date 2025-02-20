@@ -1,0 +1,2433 @@
+<!-- DrawerSubmodules.vue -->
+<script setup>
+import { computed, onMounted, ref, watch } from 'vue'
+
+const props = defineProps({
+  modelValue: Array,
+  availableSubmodules: Array,
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const submodules = ref([...props.modelValue])
+
+const searchQuery = ref('')
+
+const clientData = [
+  {
+    id: "DD2DC0A311F64EF28FD06D4C970581E1",
+    name: "PANCARAN DARAT TRANSPORT",
+  },
+  {
+    id: "81147DAF5C6A4B4FB47841A94AADA9F2",
+    name: "PANCARAN ENERGI TRANSPORT",
+  },
+]
+
+const companyData = [
+  {
+    "id": "B2B35B9B11754DF6A310C3DB6393BCBB",
+    "name": "PANCARAN LOGISTIK INDONESIA (PLI)",
+  },
+  {
+    "id": "E20E20AD6AE741459A9E41DDF80A69BA",
+    "name": "PANCARAN LOGISTIK INDONESIA SBY",
+  },
+  {
+    "id": "9B22936F4B4F4846B51250701D1B1D4B",
+    "name": "PANCARAN MARITIM TRANSPORTINDO",
+  },
+  {
+    "id": "FFB1892EA7034217AAD4DA6503AE7CC1",
+    "name": "PANCARAN SAMUDERA TRANSPORT",
+  },
+  {
+    "id": "287AB9F57E034E829836960AA3C54FC5",
+    "name": "PANCARAN TEKNOLOGI TRANSPORTASI INDONESIA",
+  },
+  {
+    "id": "08EC0C658D214C5A8EB0D831C70BAAEB",
+    "name": "SURYA HUTANI JAYA",
+  },
+  {
+    "id": "497A372AD3734E8E874AD2E1353773DA",
+    "name": "DAMCO INDONESIA",
+  },
+  {
+    "id": "1324CD127B0F438A8D91DEEB9E1D1A4F",
+    "name": "SUMISHO GLOBAL LOGISTICS INDONESIA",
+  },
+  {
+    "id": "6DF5C215F97649B88E7907A9B448AFFA",
+    "name": "VALE INDONESIA, TBK (HOLDING)",
+  },
+  {
+    "id": "72F81F82FB0F4FE49D0F12EA110118C8",
+    "name": "BDP INDONESIA",
+  },
+  {
+    "id": "2C6BB3DD88B64A558779674311FB1C93",
+    "name": "TANTO INTIM LINE",
+  },
+  {
+    "id": "772E24348B3342BDA73E23FCFB9C1C7B",
+    "name": "YAMAHA MOTOR INDONESIA",
+  },
+  {
+    "id": "BDDCEFC4B67D433283863816FA1FF091",
+    "name": "YUSEN LOGISTICS INDONESIA",
+  },
+  {
+    "id": "6120450695ED4E3E81923B4049FED70B",
+    "name": "STAR ENERGY DRAJAD",
+  },
+  {
+    "id": "FF91E499F472468DBFF81A7F550CE45B",
+    "name": "HALLIBURTON INDONESIA",
+  },
+  {
+    "id": "FFD08BC517AD4012A4C3A5BD70ADE74B",
+    "name": "BUMI MARGA KHARISMA UTAMA",
+  },
+  {
+    "id": "63D671412D85406C928B904A8935E6C7",
+    "name": "WIJAYA KARYA BANGUNAN GEDUNG TBK",
+  },
+  {
+    "id": "F30FDED5D62E40A4B13C95718E2F8437",
+    "name": "PT Asmo",
+  },
+  {
+    "id": "97BE4A27F472470A9495BC9EC2B8F0DC",
+    "name": "PT. AAA",
+  },
+  {
+    "id": "AD50610C2D354B2C9AF5F2DD260C4E90",
+    "name": "PT. AABB CCDD",
+  },
+  {
+    "id": "962ABDC656064A1DBDB3D9F748153B4F",
+    "name": "PT. Abadi Pratama Indonesia",
+  },
+  {
+    "id": "44AE815966614B51842A8867B705540B",
+    "name": "PT .ABC CARGO",
+  },
+  {
+    "id": "FDB38FB2A7E84EC1AF23223D0BBBE2D6",
+    "name": "PT.ABCD",
+  },
+  {
+    "id": "D3CCF21027274B09BA6CD7620CDA832D",
+    "name": "PT ABCDE",
+  },
+  {
+    "id": "E3EC0F1CA41240C7BB529FB083A88D3F",
+    "name": "PT. ABC DEFG",
+  },
+  {
+    "id": "D52ED8ADF41B4A818C17AF0E67CF234B",
+    "name": "PT. ACT LOGISTIC INTERNATIONAL",
+  },
+  {
+    "id": "2817CCFC76E04C4084EBFE9DFF766127",
+    "name": "PT. ACT LOGISTICS",
+  },
+  {
+    "id": "A3531814C0AE4A9CAFEEBEA847109933",
+    "name": "PT. ACT LOGISTICS",
+  },
+  {
+    "id": "739BFE9E02F540B693DA8E2B4711DB6C",
+    "name": "PT ADI GRAHA DIESELINDO",
+  },
+  {
+    "id": "B3E109DEB14D49DEB56818EDEF1A501F",
+    "name": "PT. Adika Catur Daya",
+  },
+  {
+    "id": "059C62EACE8E4217A654E80CA2B1F4F6",
+    "name": "PT Adi Karya Pratama",
+  },
+  {
+    "id": "2204269B90BB4E9D9A00D8DC45A3300E",
+    "name": "PT AETRA AIR JAKARTA (PAM JAYA)",
+  },
+  {
+    "id": "3ACF747A9025461C9A7923AACF761759",
+    "name": "PT. AGILITY",
+  },
+  {
+    "id": "8D30084263F34B2DA135A40C5F939D13",
+    "name": "PT AGREE MULIA UTAMA (Green Fog)",
+  },
+  {
+    "id": "621A310FCEE94FE3A69CAC4FA89BCA20",
+    "name": "PT. Agung Gloria Cargotama",
+  },
+  {
+    "id": "936B4AB9701A4102AC353705D42DC909",
+    "name": "PT AGUNG GLORI CARGOTAMA JAKARTA",
+  },
+  {
+    "id": "1B8E7C1F88D94EC18CC28CABDC4FCD78",
+    "name": "PT AGUS JAYA ",
+  },
+  {
+    "id": "4F3A90FB2A5D4854899A5E9B7AC9126F",
+    "name": "PT. AGUSTA MITRA SUKSES",
+  },
+  {
+    "id": "EC8D3564C01A4D5B8926AF262FD5A431",
+    "name": " PT AIG Insurance Indonesia ",
+  },
+  {
+    "id": "EF3C62B39ED04EC6A05FCA3D7A0495A7",
+    "name": "PT. AIRROWES GLOBAL LOGISTIK",
+  },
+  {
+    "id": "D86AC13B71D24272A584796BDE4B83DB",
+    "name": "PT. AKR CORPORINDO TBK",
+  },
+  {
+    "id": "65F81E600D34460A992A28D6324C5941",
+    "name": "PT ALLSYS SOLUTIONS",
+  },
+  {
+    "id": "53079FB77C5547C98A85ED6656A15845",
+    "name": "PT ALTUS LOGISTICS SERVICE INDONESIA",
+  },
+  {
+    "id": "CFCF082CA9F94F3FA75CB0FC23147893",
+    "name": "PT. ALUMUNIUM COMPANY EXTRUSION INDONESIA",
+  },
+  {
+    "id": "ACA0A06FABE84199A64E8F17232EBEDF",
+    "name": "PT.Amindo Jaya Dieseltama",
+  },
+  {
+    "id": "D78256640C84426DB7AC3E1C31230BDB",
+    "name": "PT ANDALAN FURNINDO",
+  },
+  {
+    "id": "9E16C95CE4AA4CCDBA5C4D348561B696",
+    "name": "PT Andika Teguh Setya",
+  },
+  {
+    "id": "D437A89EAF91498E8C9EA0662FD2D9B6",
+    "name": "PT Aneka Gas Industri Tbk",
+  },
+  {
+    "id": "E7182A6189FF4F78AC2DE81A368015B6",
+    "name": "PT. ANEKA INTI ANUGERAH",
+  },
+  {
+    "id": "6EB3D188E568471EA7A139534DAE85D3",
+    "name": "PT.ANEKA INTI ANUGRAH",
+  },
+  {
+    "id": "3A6598F2B05A45B7B1DD4A69153040F8",
+    "name": "PT. ANGSAPUTIH KURNIAKHARISMA",
+  },
+  {
+    "id": "565D8D11308847A8A0D55409A73537F7",
+    "name": "PT. ANTAM INDONESIA",
+  },
+  {
+    "id": "F9E838E5E93B49D883F6C90F1FD37BA5",
+    "name": "PT Antasena Agung jaya",
+  },
+  {
+    "id": "71A56BC467024B408B605824D88BF80E",
+    "name": "PT.Antasena Agung Jaya (Authorized Dealer hino)",
+  },
+  {
+    "id": "9271F72DDBB64DCCBE1AA20F4A1D208A",
+    "name": "PT. ANUGERAH BINTANG CAHAYA",
+  },
+  {
+    "id": "C57279DA053249A281BEAE2D2C9C9694",
+    "name": "PT. ANUGERAH KARYA MAGANTHA",
+  },
+  {
+    "id": "81BE071DAB3F479BAB69B49732CB30F9",
+    "name": "PT.ANUGERAH KARYA MANDIRI INDONESIA",
+  },
+  {
+    "id": "53AB3F15287144C6B2C5A3FBE09118AF",
+    "name": "PT. ANUGERAH PROTECINDO",
+  },
+  {
+    "id": "305D4BC4896B41ADA543C8C2084050F7",
+    "name": "PT. ANUGERAH PROTECINDO",
+  },
+  {
+    "id": "64C5E6D4AD3246C28D5F49D9CA1B6EDA",
+    "name": "PT. Aplikasinusa Lintasarta",
+  },
+  {
+    "id": "5B184FE32051401BA35E5C5C3DB5DFAE",
+    "name": "PT. APL Logistic",
+  },
+  {
+    "id": "D9B3A686524E43E283624EA6B45724BB",
+    "name": "PT. AP LOG",
+  },
+  {
+    "id": "36C626DF33114D58932E55C0CA33F58B",
+    "name": "PT ARHATH PUPANTARA ENERGI",
+  },
+  {
+    "id": "1C5EA067672C4BAD97719B6089065C8D",
+    "name": "PT.ARIMBI JAYA AGUNG",
+  },
+  {
+    "id": "144385CE29644674A76854A3990DA646",
+    "name": "PT. ARISTA JAYA NIAGA",
+  },
+  {
+    "id": "76E4031DD278416FAA3AD4057E2C3B4F",
+    "name": "PT ARMADA ANDALAN SENTOSA",
+  },
+  {
+    "id": "C226CA8923374B9EB91F43D21556F9C7",
+    "name": "PT. ARMADA AUTO TARA",
+  },
+  {
+    "id": "B3991A7BC8074A42B7380175F69B08F3",
+    "name": "PT. ARMAS LOGISTIC SERVICE",
+  },
+  {
+    "id": "646B92CA37DC43DB8F27E48F12948258",
+    "name": "PT. ARMINDO PERKASA",
+  },
+  {
+    "id": "B2C80E5FFD264030B6CE8CCF5C4446C4",
+    "name": "PT. Asco Dwi Mobilindo",
+  },
+  {
+    "id": "C4C269D24BC744CBB27EA693AB1A5279",
+    "name": "PT. ASCO DWI MOBILINDO",
+  },
+  {
+    "id": "C55A5B5AB88942EAAF581C7108177C47",
+    "name": "PT ASCO PRIMA MOBILINDO",
+  },
+  {
+    "id": "196D19E0F7874D5A99B94AFF9FB4AE60",
+    "name": "PT ASIA BUANA BAHARI",
+  },
+  {
+    "id": "4FFCC9A0588540DC8AD35B7EBD3C005C",
+    "name": "PT. ASIA MITRA CIPTA",
+  },
+  {
+    "id": "F30FDED5D62E40A4B13C95718E2F8437",
+    "name": "PT Asmo",
+  },
+  {
+    "id": "EB721CA78C844022A02FD670B88D1DF6",
+    "name": "pt astra",
+  },
+  {
+    "id": "BD88B08D5301493BA5CC785300D2ED8F",
+    "name": "PT.ASTRA INTERNATIONAL TBK.-Ciledug",
+  },
+  {
+    "id": "5EF33563A4A54FA38734565671AD3C1F",
+    "name": "PT Astra International Tbk-Isuzu",
+  },
+  {
+    "id": "D72A686B044141889709544252E49E9D",
+    "name": "PT.Astra International Tbk - Sukabumi",
+  },
+  {
+    "id": "FB9F3F217FE34873A1AD558DEC8D72DE",
+    "name": "PT. ASTRA INTERNATIONAL TBK. - UD TRUCKS",
+  },
+  {
+    "id": "7B3A009231974CEEA4899EA6D06F5A16",
+    "name": "PT ASTRA INTERNATIONAL TBK-UD TRUCKS SO",
+  },
+  {
+    "id": "B041221084FB4808A51F80CCADD4BED2",
+    "name": "PT. ASTRA INTERNATIONAL UD TRUCKS",
+  },
+  {
+    "id": "27D3E1D37F1043DDB6C394FAA7E493D7",
+    "name": "PT ASTRA INT TBK (PALEMBANG)",
+  },
+  {
+    "id": "C4BE18727C894806AB735D9B9784E9AC",
+    "name": "PT.ASTRA OTOPARTS TBK",
+  },
+  {
+    "id": "4AD77BB01BE54962A3000C32288D6125",
+    "name": "PT ASURANSI ADIRA DINAMIKA ",
+  },
+  {
+    "id": "3AAF45484A53474DB97346976D3F64C4",
+    "name": "PT ASURANSI ASTRA BUANA",
+  },
+  {
+    "id": "6E8FF4D81BB04D7A8E1D1EF999E40B34",
+    "name": "PT ASURANSI FPG INDONESIA",
+  },
+  {
+    "id": "A714CC1683BC4EC78832036F7CA35D4A",
+    "name": "PT Asuransi Kresna Mitra Tbk",
+  },
+  {
+    "id": "29465B071E214FC587048A3700EDA41B",
+    "name": "PT. Asuransi Reliance Indonesia",
+  },
+  {
+    "id": "DF474457B3834101BE6C5B5638921A51",
+    "name": "PT. Asuransi Sinar Mas",
+  },
+  {
+    "id": "B23FCE32F9BD4628A6C4F7AB1AE54A94",
+    "name": "PT. AUGUST INDONESIA JAYA",
+  },
+  {
+    "id": "512F748702DC47D7B4328E97110797CB",
+    "name": "PT.AWECO INDOSTEEL PERKASA",
+  },
+  {
+    "id": "59E5FCA8CF7444A195BA11D55EFFD1ED",
+    "name": "PT. AXINDO INFOTAMA",
+  },
+  {
+    "id": "0D271E7957C748FB916C0D042CBDD8A3",
+    "name": "PT BADJA ABADI SENTOSA",
+  },
+  {
+    "id": "33E54FD7935749DB8150EEC1C78FB100",
+    "name": "PT BANDAR INDAH PERMATA ",
+  },
+  {
+    "id": "9DFA11E54FAA4129A0A50A1DB8F2A4C2",
+    "name": "PT. BANGUN BETON BANTEN",
+  },
+  {
+    "id": "354BE68CD93F449BA27769A8C3F3DC56",
+    "name": "PT. BANGUN BETON INDONESIA",
+  },
+  {
+    "id": "17E9CD1B25F3403293F62D34CEA44A7B",
+    "name": "PT. BANK BNI CAB. TJ PRIOK ",
+  },
+  {
+    "id": "1192D57488D94B83A03510138D3376A3",
+    "name": "PT Batu",
+  },
+  {
+    "id": "0921988BBE8140A8BC43947EB99DCF4F",
+    "name": "PT BEON INTERMEDIA",
+  },
+  {
+    "id": "506D78B2429E4762A5A4531FE5A55A83",
+    "name": "PT. BEQUEM KREASINDO PRATAMA",
+  },
+  {
+    "id": "C50D7C722B894A07B8B6F8B84664D887",
+    "name": "PT.Berkah Lintas Utama",
+  },
+  {
+    "id": "6B9785D24BAB44079880EEF44167167D",
+    "name": "PT.BERKAH REZEKI KITA",
+  },
+  {
+    "id": "2BFA655678A242938505F6D032C5815A",
+    "name": "PT.BERKAT ABADI",
+  },
+  {
+    "id": "26898F0DCA334D1E91904C33FC7F95C7",
+    "name": "PT Berkat Kidul",
+  },
+  {
+    "id": "495F37CB21774E7396B203292CA66F23",
+    "name": "PT. BERKAT NIAGA DUNIA",
+  },
+  {
+    "id": "5E194855671F457CB2C562C09DC460D2",
+    "name": "PT. BERKAT SARANA SAFETY",
+  },
+  {
+    "id": "69E667A85EDE4A7284060A3DF59FC7A3",
+    "name": "PT. Beton Elemenindo",
+  },
+  {
+    "id": "466B71D73CBA42CCA069026B8313540C",
+    "name": "PT Bias Trikarya Indonesia",
+  },
+  {
+    "id": "59D7718CC1A649178B92D1F8D10D66B8",
+    "name": "PT. BIG BIRD PUSAKA",
+  },
+  {
+    "id": "389AB3714C51474CBC891062804E9392",
+    "name": "PT. BIMA JAYA MUSTIKAX",
+  },
+  {
+    "id": "74D0E3FF1D0C43F781015ED490849C34",
+    "name": "PT BINA PERTIWI",
+  },
+  {
+    "id": "2F2ECF34EE4D4CF28EF608D685FAFCCA",
+    "name": "PT BINTANG MUDA SRIWIJAYA ",
+  },
+  {
+    "id": "766189587874493BBB1258C54033DCB4",
+    "name": "PT BIRO KLASIFIKASI INDONESIA",
+  },
+  {
+    "id": "3AE68871894B40BFB6A8F8C4FE042A30",
+    "name": "PT. BIROTIKA SEMESTA",
+  },
+  {
+    "id": "B73919F2E72C4A2493A86D4861EAA130",
+    "name": "PT. BOLLORE LOGISTICS",
+  },
+  {
+    "id": "D98F19367C3342DEB6EE65CA9A3C1B9D",
+    "name": "PT BRAM MUARA NAULI",
+  },
+  {
+    "id": "BC9381F6ACF5400FBA526196859F4B23",
+    "name": "PT Bray Sejahtera",
+  },
+  {
+    "id": "D81D5F619563424CBD6F2ED7F6EFEE74",
+    "name": "PT. BRILLIANT JAYA ",
+  },
+  {
+    "id": "E8D8CB83F4BF4436B9A6744325BCD114",
+    "name": "PT BUDIJAYA MOBILINDO",
+  },
+  {
+    "id": "6840DF5009D24E1ABBBE9F09AF8CF79D",
+    "name": "PT Budijaya Mobilindo-MATERAI",
+  },
+  {
+    "id": "D24C6B02A5FB42768B4700A2C4F3C70E",
+    "name": "PT. BUDI MULIA DINAMIS",
+  },
+  {
+    "id": "61BB78370AD6430C94AEDD27F9061594",
+    "name": "PT Buka Pengadaan Indonesia",
+  },
+  {
+    "id": "C5F2A1D2039D4C8099AD82F9B9598FC3",
+    "name": "PT. BUMEN REDJA ABADI",
+  },
+  {
+    "id": "957B6F0D4D624461AC242E93E63F9BC3",
+    "name": "PT.BUMI BAUREKSA PRATAMA",
+  },
+  {
+    "id": "C1C9FBC2E18548F1A9DFC8AE47563712",
+    "name": "PT BUMI JASA UTAMA ",
+  },
+  {
+    "id": "3AB6BED5EEC54E43AD5614D6C46EC320",
+    "name": "PT. Bypassindo Jayaindah  ",
+  },
+  {
+    "id": "03FEF1EF096B41038319A4A45C1325BB",
+    "name": "PT. CAHAYA ANEKA PRIMA",
+  },
+  {
+    "id": "6F567C8F91434BF6BB22CC82AE2BB4CC",
+    "name": "PT. CAKRA BINTANG UNITAMA ",
+  },
+  {
+    "id": "A3A4455F4A6245E0BA58774851C0A542",
+    "name": "PT CAKRATUNGGAL STEEL MILLS",
+  },
+  {
+    "id": "80C4818CC2E140358C7B6A85939C8BEA",
+    "name": "PT Cakung Remaja Indah JayaHousing",
+  },
+  {
+    "id": "26AC3B5B1C53445084545367E186611A",
+    "name": "PT. CAPELLA MEDAN",
+  },
+  {
+    "id": "5D92BE3FD27D46B68B0D612C5298EFC3",
+    "name": "PT. Casmita Mandiri Sejahtera",
+  },
+  {
+    "id": "B612E76F488F428CB9AD2B0476A05C77",
+    "name": "PT. CATALITE INDONESIA",
+  },
+  {
+    "id": "4FA1A788153B4B0AB72EA2232D5B1F64",
+    "name": "PT. CATALITE INDONESIA ",
+  },
+  {
+    "id": "677C9A3617754CF985839961E4C17817",
+    "name": "PT. CATALITE INDONESIA ",
+  },
+  {
+    "id": "62F46960CCC348E0B8AEF421475E025A",
+    "name": "PT. CATUR KOKOH MOBIL NASIONAL",
+  },
+  {
+    "id": "A79DD654961E424889325C30A99B9764",
+    "name": "PT CATUR PRIMA PERDANA USAHA",
+  },
+  {
+    "id": "2DD89161B3D44914B5AAD42E6CC3AF26",
+    "name": "PT. CEMACO MAKMUR CORPORATAMA",
+  },
+  {
+    "id": "78E972F9D4404A39B79F60A28021B8D5",
+    "name": "PT. CHARISMA ADITAMA SENTOSA",
+  },
+  {
+    "id": "BA4A8379929E4DC18DF6BADE7B4D3FF1",
+    "name": "PT.CHEMICON - CIKARANG",
+  },
+  {
+    "id": "A2455B305B3A4E8188B2572B096C819D",
+    "name": "PT. CHEVRON PACIFIC INDONESIA",
+  },
+  {
+    "id": "3ADF816E301642649226C3EB23FC9F2E",
+    "name": "PT CHITRA PARATAMA",
+  },
+  {
+    "id": "E400E5B334234DA3B7F2901F1159C1F3",
+    "name": "PT. CIKARANG INLAND PORT (CIKARANG DRY PORT)",
+  },
+  {
+    "id": "ED8BFA3D4717448093D56072225B37AB",
+    "name": "PT CINTA ABADI BERSAMA",
+  },
+  {
+    "id": "B5D8AAEFB15B40B08C088043CD97F87D",
+    "name": "PT. CITA BAJA AUTOTRUCK",
+  },
+  {
+    "id": "B2CB157DA27148A985A550D0A3B306D2",
+    "name": "PT.CITRA LESTARI MOBILINDO",
+  },
+  {
+    "id": "62E26942FAF047AB9BE0D7DF51235062",
+    "name": "PT.Citra Nusantara Gemilang",
+  },
+  {
+    "id": "37C4D573CDB6413B974C15429A6A370A",
+    "name": "PT. CITRA NUSANTARA GEMILANG",
+  },
+  {
+    "id": "51379887DBE94E4D86FEE1CC82770C85",
+    "name": "PT. CKB",
+  },
+  {
+    "id": "B7AAA70414294C27BF99393DAAFA6BFC",
+    "name": "pt. cnc logistik ",
+  },
+  {
+    "id": "9EF4DDD9E47741B8BE5A900BDECEF0E6",
+    "name": "PT. COATES HIRE",
+  },
+  {
+    "id": "90512A0365814315BA0E1E67BFB5B1AD",
+    "name": "PT. COATES HIRES",
+  },
+  {
+    "id": "712F3D7C9AC3404399ECCAE63E4E1A2D",
+    "name": "PT. COATES HIRES ",
+  },
+  {
+    "id": "CC2E520F96484B65AC002638AB84525D",
+    "name": "PT.COATES  HIRES ",
+  },
+  {
+    "id": "3A54B0A7B1454E2399FFC2C054527009",
+    "name": "PT.COATES HIRES ",
+  },
+  {
+    "id": "5BC091D3CA6D47AAB24D2F4EE9CF970E",
+    "name": "PT.Dahana Berlian Motor",
+  },
+  {
+    "id": "04F6973D84584A1294DE0C0343E9D714",
+    "name": "PT. Dakara Citra Tangguh",
+  },
+  {
+    "id": "7CD5358F7CC34B479AC2F2417193085D",
+    "name": "PT.DAMCO TRUCKING INDONESIA",
+  },
+  {
+    "id": "8AF1BF485C6449F5A5F57D373640A90A",
+    "name": "PT.DARIEL PRATAMA MANDIRI",
+  },
+  {
+    "id": "0F9F4A6EE66A4B2CB9AFC613359DAAD0",
+    "name": "PT. DAYA DIMENSI INDONESIA",
+  },
+  {
+    "id": "5C7A54A41E1B4BBDBA641306C681CE54",
+    "name": "PT. DAYA SAMSARA MEGA",
+  },
+  {
+    "id": "FFC217B862264B74A2415B94E9BE0ED9",
+    "name": "PT. D&B Indonesia",
+  },
+  {
+    "id": "5DB054BE9C574653A9F5FD841C5D996E",
+    "name": "PT. D&B Indonesian",
+  },
+  {
+    "id": "AE96D54EA6E24F0A952CA9A814CF21E7",
+    "name": "PT. DB SCHENKER",
+  },
+  {
+    "id": "0F7459BD81B44D6F9CA817AC53C1214E",
+    "name": "PT. DELPHIA PRIMA JAYA",
+  },
+  {
+    "id": "6F3B496D434448A6B91D7C9A961315F1",
+    "name": "PT Denso Indo",
+  },
+  {
+    "id": "33599D9809EB455AABCBACE48C588B8A",
+    "name": "PT DENSO MANUFACTURING",
+  },
+  {
+    "id": "9ECA458EEA124F83B5FB29E1CB29F8FC",
+    "name": "PT. DEPOTEKNIK DUTA PERKAKAS",
+  },
+  {
+    "id": "BD55A9EC28F24A52BCCEC8EB52C79FDD",
+    "name": "PT. Diamond Jack Indonesia",
+  },
+  {
+    "id": "4F5D3C6CC86246AA97F8071AD7D4A994",
+    "name": "PT. DIESEL UTAMA INDONESIA",
+  },
+  {
+    "id": "414440AC902F42DF82DE9B8235345976",
+    "name": "PT Digital Design Creative",
+  },
+  {
+    "id": "4FC8E5E744F94FC296359EE50492D51B",
+    "name": "PT  DINAMIKA MAKMUR SENTOSA",
+  },
+  {
+    "id": "3AB497CBF1F44893A285EF2877055C9B",
+    "name": "PT DIPO PAHALA OTOMOTIF",
+  },
+  {
+    "id": "10181CEDA1904DA9987A5389EFCD1884",
+    "name": "PT. DIRGAPUTRA EKAPRATAMA",
+  },
+  {
+    "id": "9E3FFCCEC6544B6084B64FCB4F96C9F1",
+    "name": "PT DJAJA HARAPAN",
+  },
+  {
+    "id": "3CC0E5B5A1B44F4A9C13842AF925F652",
+    "name": "PT. Djajusman Abadi Group",
+  },
+  {
+    "id": "FBC51D5796DD40C48985B224254D435C",
+    "name": "PT. DKJ",
+  },
+  {
+    "id": "99F2B199C5C8477EA5065BB833F96EED",
+    "name": "PT DSL INDONESIA",
+  },
+  {
+    "id": "D292A77832DD46A8A3FD68BF602D467A",
+    "name": "PT. Duta Arta Sempana",
+  },
+  {
+    "id": "9974742BA750407ABA7F119C6D1B3A2C",
+    "name": "PT.DUTA CEMERLANG MOTOR",
+  },
+  {
+    "id": "3385894380594D58B6AA77BADC86AA0E",
+    "name": "PT Duta Flow Hidrolik",
+  },
+  {
+    "id": "C7B895477F53409EA98963C7E3B85DE6",
+    "name": "PT.DWI MULTI MAKMUR",
+  },
+  {
+    "id": "0F28DB0C8EA149A39B32B208787760AD",
+    "name": "PT. EDBERT MANDIRI SEJAHTERA",
+  },
+  {
+    "id": "BD72CB9F9F704592AB3D4AD6C28AB976",
+    "name": "PT. EKA MAS REPUBLIK",
+  },
+  {
+    "id": "1E586EBA992842A998051BCC90F20595",
+    "name": "PT ELANG TERPAL INDONESIA ",
+  },
+  {
+    "id": "0FF035612E8A44B3BEE82647EAC500E9",
+    "name": "PT. ELASTOMER NUSINDO",
+  },
+  {
+    "id": "762017B1CCB946A59CD8766112FA4701",
+    "name": "PT. ELNUSA Tbk",
+  },
+  {
+    "id": "971EFD086CC149F08981A8423E87D065",
+    "name": "PT. ELNUSA Tbk",
+  },
+  {
+    "id": "A5F65D948CB647B59EE59DE052D22E63",
+    "name": "PT. ENERREN TECHNOLOGIES",
+  },
+  {
+    "id": "7508672380C74A1AAE209CAB202EB07A",
+    "name": "PT.ENERREN TECHNOLOGIES",
+  },
+  {
+    "id": "7F11C131E6F3474C82C2BB867E801905",
+    "name": "PT ESENSI MITRA SOLUSI ",
+  },
+  {
+    "id": "378F25361B8D4D1B87B105B9727B81FE",
+    "name": "PT. ETA INDONESIA",
+  },
+  {
+    "id": "A0C1F35D13A64ECA9D2EA1B6CABBC99F",
+    "name": "PT.Everald Prima Perkasa",
+  },
+  {
+    "id": "1251D88F42584BC080878D33CF6917B4",
+    "name": "PT Excellent Infotama Kreasindo",
+  },
+  {
+    "id": "10417023239A4DA2A8D4747FCDCBF8B5",
+    "name": "PT FAMON GLOBAL AWAL BROS",
+  },
+  {
+    "id": "1A9F95716EDE42ACB5686BEB780D8250",
+    "name": "PT FEDERAL KARYATAMA",
+  },
+  {
+    "id": "0A691EF1BE174C3F92FA38A939F841A5",
+    "name": "PT. FERRYNDO MAJU PRATAMA",
+  },
+  {
+    "id": "253AC10969C0464FBEF83FA03702F6B0",
+    "name": "PT. FLEXINDO MANDIRI UTAMA",
+  },
+  {
+    "id": "A478A1580E5749148A012ABF0E653FA3",
+    "name": "PT. FNF Trans Niaga",
+  },
+  {
+    "id": "6FD73E93B8D54BF3A915016FA0B7785F",
+    "name": "PT. FOCUSTINDO CEMERLANG",
+  },
+  {
+    "id": "700E279EBC0C4047B735E4D3200696F8",
+    "name": "PT. FORTA LARESE",
+  },
+  {
+    "id": "9105F5993AF044009E0BBFECEB002F53",
+    "name": "PT GARIGA MUDA INSPEKSI",
+  },
+  {
+    "id": "5A91091FB14145D98AD126AF1D41B0B4",
+    "name": "PT GARUDA BEARINDO MAKMUR",
+  },
+  {
+    "id": "C0C398AAC81C45D0BAD3C8F15BDA60D1",
+    "name": "PT.GAYA MAKMUR TRACTORS",
+  },
+  {
+    "id": "FFA5C00E3B4445E999FD986662FE58C1",
+    "name": "PT GEMALA SARANA UPAYA",
+  },
+  {
+    "id": "76BC809B87DE45E99BC50DF667B5CF59",
+    "name": "PT. GEMA PIRANTI SEMESTA",
+  },
+  {
+    "id": "8A0C4A155A7D4A9D99FD4DC55E23BDA8",
+    "name": " PT. Gema Sarana Transport",
+  },
+  {
+    "id": "B99A535B245F46DA935EFE42EB05084F",
+    "name": "PT. GENERAL AGRO MESIN LESTARI",
+  },
+  {
+    "id": "E0287A597C2E480CBFC80D0B773A968F",
+    "name": "PT. GERBANG TEKNOLOGI CIKARANG",
+  },
+  {
+    "id": "6EDA4995FF2244F4B40E5A68234AF88F",
+    "name": "PT GITA RIAU MAKMUR",
+  },
+  {
+    "id": "D12D13AF26FE4A7A91E3C2AEB36F8266",
+    "name": "PT. GITA RIAU MAKMUR",
+  },
+  {
+    "id": "A4024220E4454A7F925C22C532A204BB",
+    "name": "PT. Global Citra Primakarya",
+  },
+  {
+    "id": "EBA65AE4E9074A8F8CC103A7335908E8",
+    "name": "PT Global Citra Primakarya (GPC)",
+  },
+  {
+    "id": "23BBB85B51F34E38B22A4800FA11CFF6",
+    "name": "PT. GLOBAL INFOTECH SOLUTION",
+  },
+  {
+    "id": "295B206BE1314405BAA4C4CBEB0020F3",
+    "name": "PT. GLOBAL SECONT",
+  },
+  {
+    "id": "3D58B0610D8543C6BBB4167B50F7CCD5",
+    "name": " PT GRAHANUSA MEDIATAMA ",
+  },
+  {
+    "id": "3CD3918258ED4262A30CEFAAC8A78ABB",
+    "name": "PT-GShock",
+  },
+  {
+    "id": "1E04193B6EF24AC0B8E6FED0D44B0AAE",
+    "name": "PT.GUNINDO",
+  },
+  {
+    "id": "C3FBB5FAC6B7493FADF755BB5218D531",
+    "name": "PT GUNUNG MAS ",
+  },
+  {
+    "id": "879BDA133A5847509B80B42CED6409A4",
+    "name": "PT. GURITA SOLUSINDO",
+  },
+  {
+    "id": "F3631499F5B248A4A66ABA0921574816",
+    "name": "PT.HADJI KALLA",
+  },
+  {
+    "id": "4F4A2F93BBD94DC6BE3CF590004D1E44",
+    "name": "PT.HAMASA STEEL CENTRE",
+  },
+  {
+    "id": "642E5F156DAD46F8826DFEA6130D698A",
+    "name": "PT Hanosen Pratama",
+  },
+  {
+    "id": "CE77EA2355394938B487064BB71C8D33",
+    "name": "PT. HARAPAN SAKTI UTAMA",
+  },
+  {
+    "id": "50EB691581884C5B9C4B2684B8FFE126",
+    "name": "PT. HARTA BAN (MITRA)",
+  },
+  {
+    "id": "CFD90EE9BE5D408595678E3D10A33FA1",
+    "name": "PT HARTA BAN TEST",
+  },
+  {
+    "id": "F3738B1439D64C18BBDD76EBEC4EF4D1",
+    "name": "PT. HARTA GADING INDONESIA",
+  },
+  {
+    "id": "60215C090BB2435085F0A142270D750F",
+    "name": "PT Hartono Raya Motor",
+  },
+  {
+    "id": "068EFDDFE1534857AC2CC1321DF60114",
+    "name": "PT HARTONO RAYA MOTOR(Mercedes Benz)",
+  },
+  {
+    "id": "32274E4C7FAE48198BA2C4195C9FD784",
+    "name": "PT HENGTRACO PROTECSINDO",
+  },
+  {
+    "id": "6A564CCFA8B349C29BE4D237E5229556",
+    "name": "PT.HIBAINDO ARMADA MOTOR",
+  },
+  {
+    "id": "F27C98BE686E47ACBC6959792983FE21",
+    "name": "PT. HOLCIM INDONESIA, TBK",
+  },
+  {
+    "id": "2E8DB01403874F7394280881E2F6B4D2",
+    "name": "PT. HUDAYA MAJU MANDIRI",
+  },
+  {
+    "id": "36A4C1763CE2499189BAE9BE925C0C99",
+    "name": "PT. ICI PAINT INDONESIA (AKZONOBEL)",
+  },
+  {
+    "id": "A4F36562E75247C480361E749B82A5C8",
+    "name": "PT INDAH MITRA RAHARDJA",
+  },
+  {
+    "id": "EC5628605D474F568C25DB5EC0FC7B6F",
+    "name": "PT INDAH MITRA RAHARDJA",
+  },
+  {
+    "id": "B6BC74C7DB7C4A7AAA55639168A112DF",
+    "name": "PT. INDARTO LOGISTIK",
+  },
+  {
+    "id": "01F060EEC7F24B7F8FD4FC49DCE0304D",
+    "name": "PT. INDARTO SEJAHTERA",
+  },
+  {
+    "id": "3F6DD915263243C4AAEF52C62EF19236",
+    "name": "PT INDOBEARING PERKASA",
+  },
+  {
+    "id": "F69197B11C1B4825A3F2AA0BAE90537E",
+    "name": "PT. INDODEV NIAGA INTERNET",
+  },
+  {
+    "id": "4A3C6776762F4061B4D68EC841B27492",
+    "name": "PT. INDOMOBIL PRIMA NIAGA",
+  },
+  {
+    "id": "40B5D8B11D594FCFA2134E2D6E883B1B",
+    "name": "PT.INDOMOBIL PRIMA NIAGA (MEDAN)",
+  },
+  {
+    "id": "156993CC4CBC4C7F8A54E2E6F61E215D",
+    "name": "PT. INDO MOTOR LESTARI",
+  },
+  {
+    "id": "62E939364AC04B65875C5E01128C6D38",
+    "name": "PT INDOPARTA NUSANTARA",
+  },
+  {
+    "id": "797E6454FE07405FB327080ACBF16506",
+    "name": "PT INDOPARTA TEST",
+  },
+  {
+    "id": "83DA2A71099C4D6A9964AB9FC6CB7496",
+    "name": "PT. INDOPUTRA PERDANA",
+  },
+  {
+    "id": "1B43D1897B9D40A7A61D889EDD661821",
+    "name": "PT. INDOSENTOSA TRADA",
+  },
+  {
+    "id": "A0EDCB0C83CF4C66AEC4FC3AA5DA6AEA",
+    "name": "PT. INDOTAMA DEMESTIK LESTARI (IDL)",
+  },
+  {
+    "id": "85E5695C26004668B947CDEC7C3F8A89",
+    "name": "PT INDO TEKNIK LINDETEVES",
+  },
+  {
+    "id": "3D62035B55AD445F8C51F616240D055F",
+    "name": "PT INDO THAI",
+  },
+  {
+    "id": "C6E44F49857C407F99B08D9673ADF8B4",
+    "name": "PT. INDOTHAI TRADING",
+  },
+  {
+    "id": "8B1753C01B1D4479957E0FE3F2E05C76",
+    "name": "PT.INDOTHAI TRADING",
+  },
+  {
+    "id": "E0FC86EF90B44DE9979A557588F5028A",
+    "name": "PT. INDOTRUCK UTAMA",
+  },
+  {
+    "id": "9B4A8D7D8FCF41229B2594603EE914AA",
+    "name": "PT.INDOTRUCK UTAMA",
+  },
+  {
+    "id": "37DC6CFB09FF45C6A3108CD72C381C6E",
+    "name": "PT Indotyre Mandiri Sentosa",
+  },
+  {
+    "id": "FA04D758B752455A8EAE20EBF42ECB8E",
+    "name": "PT. INTEGRA",
+  },
+  {
+    "id": "E85228361E84462CA90A3A4AD307171B",
+    "name": "PT. INTERTREND",
+  },
+  {
+    "id": "6698445BEF4C4B4EA0BCC3CB8045A072",
+    "name": "PT. INTI LINGGA SEJAHTERA",
+  },
+  {
+    "id": "D21ECBC4837546AB8C2A4C137E79986B",
+    "name": "PT INTI LINGGA SUKSES",
+  },
+  {
+    "id": "AAD4104C44E44D23BEE83BD6CB0765CC",
+    "name": "PT.INTISUMBER BAJASAKTI",
+  },
+  {
+    "id": "12FD7DD76A0F4576A3883AA64C5CD90A",
+    "name": "PT.JALUR NUGRAHA EKA LOGISTIK",
+  },
+  {
+    "id": "39A488D7CD434C3DAC3D882CE3B125C2",
+    "name": "PT. JALY INDONESIA UTAMA",
+  },
+  {
+    "id": "7A4DDFA4712440DA83091C1C4CFF5163",
+    "name": "PT. JASARANA TIRTAMANIK",
+  },
+  {
+    "id": "384532BF1E9E48549B0F4FED4C13E886",
+    "name": "PT JAVA CONTAINER LINES INDONESIA",
+  },
+  {
+    "id": "93512D438CC54263B25935042EA0C167",
+    "name": "PT.JAYA INDAH MOTOR (HINO)",
+  },
+  {
+    "id": "FB23B87F09CF43D5BA100C727AAC21FE",
+    "name": "PT. JD.ID",
+  },
+  {
+    "id": "8823F04A51D44AF28A1BD44624E13810",
+    "name": "PT JITU Metal Works",
+  },
+  {
+    "id": "9A793DF4AE444DBCA637FCB550CD3A08",
+    "name": "PT Jobsteet Indonesia",
+  },
+  {
+    "id": "F23F21EED69B4DB39561994C4EE31A4A",
+    "name": "PT Jujur Santosa Abadi",
+  },
+  {
+    "id": "E9F335E344284FE1B5E1BF2E788288EF",
+    "name": "PT. Jujur Sentosa Abadi",
+  },
+  {
+    "id": "C0C550FCFA774DBE92B28C385733ABF7",
+    "name": "PT. JUMBO POWER INDONESIA QQ Darwin",
+  },
+  {
+    "id": "E3821F2B9DC5403394A0E8B3BDBBBFA7",
+    "name": "PT. JUMBO POWER INTERNATIONAL ",
+  },
+  {
+    "id": "FBDD5EFE03624863A20508D65D6450A6",
+    "name": "pt .junaidi express ",
+  },
+  {
+    "id": "B7C4C700F3A14DD6AC005C1B9F8932A3",
+    "name": "PT JUNAIDI LOGISTIK",
+  },
+  {
+    "id": "BA32E03C7E4047A496ACC0881F8386E3",
+    "name": "PT Kalbe",
+  },
+  {
+    "id": "48279C02F0A6419BA0FDCAA3B588D3E1",
+    "name": "PT. Kalibesar Raya Utama",
+  },
+  {
+    "id": "4861B83EB7984F53B21A18601ECC2712",
+    "name": "PT. KALOG",
+  },
+  {
+    "id": "958F9534BD1846C0A75091869BAB40DB",
+    "name": "PT. Kampreto",
+  },
+  {
+    "id": "7CC471C60C394F1690685C26FA461B80",
+    "name": "PT Karawang Taro Logistic Center Indonesia",
+  },
+  {
+    "id": "A609F86FE0314CADA3BA5089445275C4",
+    "name": "PT Kartika Bina Medikatama",
+  },
+  {
+    "id": "47A0C9952D9A41429FDD4F80D57DD767",
+    "name": "PT. KARUNIA JAYA GLOBAL",
+  },
+  {
+    "id": "14BA3AB0CC204B008DD88EFF659C479E",
+    "name": "PT. KARYAMITRA TATA BERSAMA",
+  },
+  {
+    "id": "60FC3F09D9E34ADBB2E2E97629B97751",
+    "name": "PT. KARYA SAMPURNA",
+  },
+  {
+    "id": "BC035892A83146FDA7F5330094B3B6B2",
+    "name": "PT. KARYAWAJA EKAMULIA",
+  },
+  {
+    "id": "45B38FF3029246A3A60B23191F3E5407",
+    "name": "PT. KARYA ZIRANG UTAMA",
+  },
+  {
+    "id": "EAEE5E050A8C4A31B40F81EA827C7F92",
+    "name": "PT. KASANA TEKNINDO GEMILANG",
+  },
+  {
+    "id": "1B13CC126FBA4FC992546B4D431F5214",
+    "name": "PT.KASANA TEKNINDO GEMILANG",
+  },
+  {
+    "id": "9DF024673E424D0C90323D807E472F4F",
+    "name": "PT. KAYANA NAGRI NUSANTARA",
+  },
+  {
+    "id": "9A5611395E8C40FEB0316BADE0FB37FE",
+    "name": "PT KENCO PRIMADEA",
+  },
+  {
+    "id": "6EA273C16CD24EACB2C57EB698305D3A",
+    "name": "PT KERETA API LOGISITIK (KALOG)",
+  },
+  {
+    "id": "3975390C1F2445F98A7BDBD2B651CDD3",
+    "name": "PT. Kereta API Logistik",
+  },
+  {
+    "id": "EB0E2551C8D849EDBD33353E35E3AE51",
+    "name": "PT. KHARISMA CITATUNGGAL",
+  },
+  {
+    "id": "05E030D7584346C3B956662148290F64",
+    "name": "PT.KHARISMA ESA UNGGUL",
+  },
+  {
+    "id": "F9D976976240417D8D3FB5421ECCFD96",
+    "name": "PT. KIKIJAYA AIRCONINDO",
+  },
+  {
+    "id": "752C5001684C47D2987AB9279AAE07A9",
+    "name": "PT. KIM GEMILANG BERSAMA",
+  },
+  {
+    "id": "EDDC463F448C437187D51A50D6E608AF",
+    "name": "PT. Klase Auto Graha",
+  },
+  {
+    "id": "3A60D6D0D6F64838854739B24A17C12B",
+    "name": "PT KRISBOW INDONESIA",
+  },
+  {
+    "id": "4B12843EDC924B71AF2051291564A210",
+    "name": "PT KUBIK KREASI SISILAIN ",
+  },
+  {
+    "id": "0040F26558B146A4AE020C83C59F9526",
+    "name": "PT Kubik Mitra Suksesmulia",
+  },
+  {
+    "id": "3EF99EFAD51D4327B6A65A6599ABEA33",
+    "name": "PT KUMALA NUGRAHA RACHMAN",
+  },
+  {
+    "id": "AC06110F50ED494D969C85AF304533D3",
+    "name": "PT. Kumala Sukses Abadi",
+  },
+  {
+    "id": "7F359565C4C04A59B2526922E04F6049",
+    "name": "PT Lambert Namarito Jaya",
+  },
+  {
+    "id": "C298647581CE47FB8D9644EA86157582",
+    "name": "PT LANCAR MAJU ",
+  },
+  {
+    "id": "2B83E2240FA1432FA2F6A7A203D7E87F",
+    "name": " PT. LEATAT CHEMINDO ",
+  },
+  {
+    "id": "A7BD37A0F7D64C36B0A9F88DA96E25D2",
+    "name": "PT. LINK NET",
+  },
+  {
+    "id": "7CB28430B32F4488954EF518464EE5F8",
+    "name": "PT Lintas Buana Express Logistics",
+  },
+  {
+    "id": "F8F9651760B74E849521894BC0E0C45D",
+    "name": "PTLO",
+  },
+  {
+    "id": "1F0481383DD04420A5EC31F9F39052C0",
+    "name": "PT LOGISTIK PINTAR INDONESIA",
+  },
+  {
+    "id": "A5C955D853D6421DBBF649658A45D371",
+    "name": "PT LOGOS INDONESIA MANDIRI",
+  },
+  {
+    "id": "01272B3F356C4F5FBE6FD78AC6BEA880",
+    "name": "PT. LOGWIN LOGISTICS",
+  },
+  {
+    "id": "2223ABC19E6A49208FA245B3AE65AE4B",
+    "name": "PT LOTTE MART INDONESIA",
+  },
+  {
+    "id": "EE835CA68B7142B68118E9A37BF3C50F",
+    "name": "PT. LUSIANA GROUP INDONESIA",
+  },
+  {
+    "id": "0E3FD626E673482387CE6FEA7651EBBF",
+    "name": "PT. MAHAKAM KENCANA INTAN PADI ",
+  },
+  {
+    "id": "C72BC784CEC1460889CA29D155F63FDB",
+    "name": "PT. MAHLIGAI PUTERI BERLIAN",
+  },
+  {
+    "id": "14F7961CE5104BC49535E097498C24A3",
+    "name": "PT MAHLIGAI PUTRI BERLIAN",
+  },
+  {
+    "id": "F989A53E1BD4428FBC39FE446E2EA860",
+    "name": "PT MAJU MUNDUR ",
+  },
+  {
+    "id": "1C68FD12DC7141FC99EFD36ABB0D08BE",
+    "name": "PT Maju Trans Abadi",
+  },
+  {
+    "id": "BC4848CFB3DB41CCA120586F6E265730",
+    "name": "PT Maju Trans Abadi",
+  },
+  {
+    "id": "AF64CB5ADE00478AA781F004296E193C",
+    "name": "PT. MANDAR PUTRA PERKASA",
+  },
+  {
+    "id": "87DFA433C073429C89D72C2E71FEE5FB",
+    "name": "PT. MANDIRI MAX SOLUTIONS",
+  },
+  {
+    "id": "DDFBB04AD5C644F19E2950A50FA15E5D",
+    "name": "PT.Mandiri Nusa Jaya Abadi",
+  },
+  {
+    "id": "BF8B1B0A1F7D4FD1ABF72B6C081302A8",
+    "name": "PT. Mandiri Tunas Finance",
+  },
+  {
+    "id": "F457A0E7C7BF4B638FB75EB42D0F1EBC",
+    "name": "PT. MANGKU PUTRA (PERTAMINA)",
+  },
+  {
+    "id": "F7A8611DE7C74C3986C61747DADEED8F",
+    "name": "PT.MARUTEK JAYA NUSANTARA",
+  },
+  {
+    "id": "32503F94242240E8A455139B3416DFCC",
+    "name": "PT MARWITA MEKAR MADAYA ",
+  },
+  {
+    "id": "E27DE66DCBD644EEA6E62CD0FFAF34C3",
+    "name": "PT MASABARU GUNAPERSADA",
+  },
+  {
+    "id": "907E3B27C350448CA3F17D02886811D8",
+    "name": "PT.MASAKWARTA SEJATI",
+  },
+  {
+    "id": "9010CC1C65CC4FA5A17811AEF4136E89",
+    "name": "PT. MASTRATECH INDONESIA",
+  },
+  {
+    "id": "D494DDC6B24F4CCAB9DD991F2732C90E",
+    "name": "PT. MAYA GRAHA INDAH",
+  },
+  {
+    "id": "631D466A08E9482E8873D32F7CABFCC6",
+    "name": "PT Mayora",
+  },
+  {
+    "id": "FA186794F06E48209BB21EC27835936F",
+    "name": "PT.MEGADEPO INDONESIA",
+  },
+  {
+    "id": "4095F2B2E2F04B2BB38985132D050A2A",
+    "name": "PT MEGA JAYA SENTOSA",
+  },
+  {
+    "id": "EBB4CE86E4ED4E589E8BC18A2D013E4D",
+    "name": "PT Mencari Cinta Sejati",
+  },
+  {
+    "id": "9A52CA25A4EB4EE79F486DAFB3391DA3",
+    "name": "PT MENCARI CINTA SEJATI",
+  },
+  {
+    "id": "FDA32C3BB2C04E37B7CAEBD8871785B7",
+    "name": "PT.MERPATI ALAM SEMESTA",
+  },
+  {
+    "id": "2E4732F072CF47029F19912226539E9A",
+    "name": "PT. Metta Trans Perkasa",
+  },
+  {
+    "id": "31CAB706EDB24FC99BB7CFE8703B2677",
+    "name": "PT MEX BARLIAN DIRGANTARA",
+  },
+  {
+    "id": "ED597CB791B14E4C92F59CB00534968D",
+    "name": "PT. MITRA 2 MANDIRI LOG",
+  },
+  {
+    "id": "47C354B00B1544E4B8E0B3094A56F890",
+    "name": "PT Mitra Antar Kontener ",
+  },
+  {
+    "id": "83C1A6A265FF406B92B7EEE8E7D254AB",
+    "name": "PT.MITRA CIPTA HARDI ELEKTRINDO",
+  },
+  {
+    "id": "F62433B73CF2459E87F6BCE69231B74A",
+    "name": "PT. MITRA PINASTHIKA MUSTIKA RENT",
+  },
+  {
+    "id": "1CC1AF982E2E4388B7AB004C350C7FD6",
+    "name": "PT. MITRA TOYOTAKA INDONESIA",
+  },
+  {
+    "id": "ECB73971EA2D4357BABFBBC581966FEE",
+    "name": "PT.MITRA USAHA JAYA MANDIRI",
+  },
+  {
+    "id": "0E619481F9D74F6B9569FDFAE782EE98",
+    "name": "PT. Mitsubishi UFJ Lease & Finance Indon",
+  },
+  {
+    "id": "5E5E14D91CFE428B948321D584E96FC4",
+    "name": "PT.MITSUI LEASING CAPITAL INDONESIA",
+  },
+  {
+    "id": "D48C38FB2B86417C8DFA2928C9A98073",
+    "name": "PT. MOBILKOM TELEKOMINDO",
+  },
+  {
+    "id": "55E380E6C5E14C438BBE481AC3DF250F",
+    "name": "PT.Muliaform Grafido",
+  },
+  {
+    "id": "DFAA3388EEF048238EFBE60F8345040A",
+    "name": "PT. MULTIDAYA PRIMA LESTARI",
+  },
+  {
+    "id": "8CDFCD17780A4B6588B969BF964C8302",
+    "name": "PT. MULTI LOGISTIK INDONESIA",
+  },
+  {
+    "id": "FC45579367A64CA6972F68D065EE6A5F",
+    "name": "PT. MULTIPROSES USAHA MITRA SEJAHTERA",
+  },
+  {
+    "id": "2C226C6CB59C49B288B56091F266C22F",
+    "name": "PT. MULTI TRAKTOR UTAMA ",
+  },
+  {
+    "id": "0C1C06DD029F47C6916BA01102FBC319",
+    "name": "PT. Naga Mas Mulia ",
+  },
+  {
+    "id": "E2865F604B884787BF7FE19C1CA24AFC",
+    "name": "PT. NAKU FREIGHT",
+  },
+  {
+    "id": "AA69F36066714380AE67C4CB1B96112F",
+    "name": "PT. NEW PRIOK CONTAINER TERMINAL ONE ",
+  },
+  {
+    "id": "AF6CFC6F56D8453F98A23215F628EB4D",
+    "name": "PT NFN Trans Niaga",
+  },
+  {
+    "id": "E6964F9A88F14458914BE3BF4D8EF91C",
+    "name": "PT.NIAGA INDOGUNA YASA",
+  },
+  {
+    "id": "30F9630F3E60455197ACB68EC0B664B9",
+    "name": "PT. NITTSU LEMO",
+  },
+  {
+    "id": "5644572C433642C7A71E5465B7B987B0",
+    "name": "PT NOAH LOGISTIK INDONESIA",
+  },
+  {
+    "id": "FEC980F7C5DF4D23A3438C9C252B6299",
+    "name": "PT NUR TRANS MAJU ",
+  },
+  {
+    "id": "F8BBF17DB1554677AFADA58EDC49BF96",
+    "name": "PT.NUSANTARA DIESEL PRATAMA",
+  },
+  {
+    "id": "B6A930128CB94CF484DA2FC7ABF52D5B",
+    "name": "PT.ORENZ TEKNOLOGI INDONESIA",
+  },
+  {
+    "id": "B211D3A42C25457284ABFAD95FAE6359",
+    "name": "PT. Orix Indonesia Finance",
+  },
+  {
+    "id": "97C9F6AAC2EA493C8103CC8F3B3F285A",
+    "name": "PT. PAMOR BUANA UTAMA                   ",
+  },
+  {
+    "id": "DDD1701AF67E468880D3A07184EE9BD8",
+    "name": "PT PANCA BUDI LOGISTINDO",
+  },
+  {
+    "id": "177BB1CD604B44C0A6B46BCC0B66C88A",
+    "name": "PT. PANCA JAYA SETIA",
+  },
+  {
+    "id": "3BAF24337D1C4F0AA77B284425DAA411",
+    "name": "PT PANCANAKA NUSANTARA JAYA ",
+  },
+  {
+    "id": "80A58FDEE1E7499595686D86D451ED67",
+    "name": "PT PANCARAN DARAT TRANSPORT",
+  },
+  {
+    "id": "32421B5F883A41248971E611AEF2BC73",
+    "name": "PT. PANCARAN ENERGI TRANSPORT",
+  },
+  {
+    "id": "D2A0AB5134894C01A87152BE3C688D3F",
+    "name": "PT. PANCARAN LOGISTICS INDONESIA",
+  },
+  {
+    "id": "EEF350BB39784FCFBE80502F04513016",
+    "name": "PT. PANCARAN LOGISTIK INDONESIA",
+  },
+  {
+    "id": "B1CF36019D5B4B9F875792A36EC785DE",
+    "name": "PT. PANCARAN MARITIM TRANSPORT",
+  },
+  {
+    "id": "50CB31A24CC54E0DB600CAC336D984F7",
+    "name": "PT. PANCARAN SAMUDERA TRANSPORT",
+  },
+  {
+    "id": "3D3E1D53B6D54E3B95F96205E7A4C0A3",
+    "name": "PT. PANCARAN SAMUDERA TRANSPORT",
+  },
+  {
+    "id": "B9D417C9443E4B64B352E90A5A0620AD",
+    "name": "PT PANCARAN TEKNOLOGI TRANSPORT",
+  },
+  {
+    "id": "C6C8B58C218C40088FEF1E0300316180",
+    "name": "PT PANCARAN TEKNOLOGI TRANSPORTASI INDONESIA",
+  },
+  {
+    "id": "FB1B0E67CCFE4D1E9C08D82AC16C7AED",
+    "name": "PT PANCARAN TEKNOLOGI TRANSPORTASI INDONESIA",
+  },
+  {
+    "id": "D8F44C157D2641FA97478714E96537B9",
+    "name": "PT PANCARAN TEKNOLOGI TRANSPORTASI INDONESIA ",
+  },
+  {
+    "id": "CA27ED0881774860961B7E6AD0E71A25",
+    "name": "PT PANCARAN TEKNOLOGI TRANSPORT INDONES",
+  },
+  {
+    "id": "DDFCE2059DAF4A77A82A518C6BDECA04",
+    "name": "PT PANCA SRIWIJAYA ENERGI",
+  },
+  {
+    "id": "1C53EF42ACB54BA29F961D6B6F3CC29E",
+    "name": "PT PARAHYANGAN TRANS EXPRESSINDO",
+  },
+  {
+    "id": "BC4FA2557B34453A92C92FC10D2E4BE0",
+    "name": "PT PARTSINDO SERVICATAMA",
+  },
+  {
+    "id": "C90E6AE52EF04DD98BBAE06DB8631679",
+    "name": "PT.PELAYARAN NUSANTARA SEJATI",
+  },
+  {
+    "id": "395E9D46976B4E11B93A89F046A9FF6C",
+    "name": "PT.PELITA TATAMAS JAYA",
+  },
+  {
+    "id": "7CADDCA41698419FB9305BB1A8EA94B6",
+    "name": "PT. PENASCOP LOGISTIK TRANSNIAGA",
+  },
+  {
+    "id": "D92AE83A86584F3687320AD5A11565B1",
+    "name": "PT. Permata Gading Auto Center",
+  },
+  {
+    "id": "8DB8DD9C03A54F5892A025C550240BB3",
+    "name": "PT. PERSADA BATAVIA DIESEL",
+  },
+  {
+    "id": "484F65287A504E5081A64732F9A50381",
+    "name": "PT.PERSADA LAMPUNG RAYA (HINO)",
+  },
+  {
+    "id": "462AF9036EDF446992DA504D8950C68B",
+    "name": "PT.PERSADA PALEMBANG RAYA (HINO)",
+  },
+  {
+    "id": "9B1B88882E234619B8C6AFB0FC774F75",
+    "name": "PT PERTAMINA PATRA NIAGA",
+  },
+  {
+    "id": "606EDD8A1428452B9D60C1F705FB8587",
+    "name": "PT.Pertamina Retail Jakarta",
+  },
+  {
+    "id": "DBA30022D0B0473CB6A0E33E57C85968",
+    "name": "PT. PERTAMINA RETAIL - REGULER",
+  },
+  {
+    "id": "6854961EE46443DA98145C27D8345E95",
+    "name": "PT. PETROLAB SERVICES",
+  },
+  {
+    "id": "F3B58E369DEC4E61B0E60A6C38F7543E",
+    "name": "PT. PIONEER",
+  },
+  {
+    "id": "82F54369BF9E4776B7F674C98C40EC27",
+    "name": "PT. PIONIRLIDO",
+  },
+  {
+    "id": "16873A25DBAE4C859A7CA233F5339954",
+    "name": "PT Polygon Perkasa Indonesia",
+  },
+  {
+    "id": "04758CB7ABBC499AA573A6FAE2FBEF2D",
+    "name": "PT. PORTER REKAYASA UNGGUL",
+  },
+  {
+    "id": "32392A58ED184DC087CCCB0FCEF2D0EA",
+    "name": "PT.POS INONESIA(PERSERO)",
+  },
+  {
+    "id": "E5A0EA1957484A1883B8254F3FD270B4",
+    "name": "PT PRAKARSA PUTRA",
+  },
+  {
+    "id": "96754AECC6174766939A84FDC870983A",
+    "name": "PT.PRATAMA CARGO LOGISTIC",
+  },
+  {
+    "id": "66D1AC87D7B846C187DDF52945850479",
+    "name": "PT PRIMALAYAN CITRA MANDIRI (LENOVO SERVICE CENTER)",
+  },
+  {
+    "id": "FBC9B7A03B5645A5A13757069442FA90",
+    "name": "PT PRIMA NUSA GLOBALINDO",
+  },
+  {
+    "id": "DB4F3C4745B5489B9D7E64C67FF3E469",
+    "name": "PT. PRIMANUSA GLOBALINDO",
+  },
+  {
+    "id": "5DDAB44E9D944922BE4A0641E901E768",
+    "name": "PT. Prodia Widyahusada",
+  },
+  {
+    "id": "97A6AAC213BC4909AB945A9B6E1F886E",
+    "name": "PT. PROVA",
+  },
+  {
+    "id": "9DAF579BD8874E1EBF03E51EB970C2ED",
+    "name": "PT PT",
+  },
+  {
+    "id": "330DCD781AA64C698877683A1A7F47C0",
+    "name": "PT. PULAU INTAN LESTARI",
+  },
+  {
+    "id": "07689BA2ABFC4FA28A6451A99B9F5D6F",
+    "name": "PT.PUMA JAYA UTAMA",
+  },
+  {
+    "id": "1566ADAD07834DB58F67E2B9292D3D38",
+    "name": "PT Puncak Jaya Abadi",
+  },
+  {
+    "id": "7411F9F7C4C9418097421A3787981483",
+    "name": "PT. PUNINAR",
+  },
+  {
+    "id": "0DC46CFBE27C4177AF548E82D37D1677",
+    "name": "PT. PURI SEJAHTERA UTAMA",
+  },
+  {
+    "id": "7D3476B053A847C582E67E1F586BB291",
+    "name": "PT. PUTRA IDAMAN",
+  },
+  {
+    "id": "24DB8A77EB2949F3B3AF4680A3218E7C",
+    "name": "PT. Putra Jaya Trisakti",
+  },
+  {
+    "id": "D674A4FD9CED4FF78673D76C202E2185",
+    "name": "PT PUTRA PELANGI PERKASA",
+  },
+  {
+    "id": "0395EFB253EC421899F578841F610BE8",
+    "name": "PT.PUTRA PERDANA SENTOSA",
+  },
+  {
+    "id": "828195DD37F040529A9C9A4B41628BBF",
+    "name": "PT PUTRA WIJAYA SUKSESINDO",
+  },
+  {
+    "id": "E656FADFB3854CB79EC883954CD800B5",
+    "name": "PT QUANTUM TERA NETWORK",
+  },
+  {
+    "id": "4F088AA2B4E44406B3BE37C4EED77BD7",
+    "name": "PT Rajawali LBS",
+  },
+  {
+    "id": "5DA2DF0ED5504DE8B985C8601127B91E",
+    "name": "PT RAJUS DEFA TEKNIK",
+  },
+  {
+    "id": "2A9EF8EA52F34B528274162F63FF2093",
+    "name": "PT REKADAYA ELEKTRIKA",
+  },
+  {
+    "id": "DE8670BAB51444FBAB8A7489310131A6",
+    "name": "PT. RHENUS LOGISTICS",
+  },
+  {
+    "id": "C520B9105477432A9B2065C830B3A596",
+    "name": "PT RITEL BERSAMA NASIONAL",
+  },
+  {
+    "id": "5667C17E8CCE4546A4A767AAC6DE2BD3",
+    "name": "PT RITRA CARGO INDONESIA",
+  },
+  {
+    "id": "87DF950B3A95407AA18F9430967093D2",
+    "name": "PT.RITRACS",
+  },
+  {
+    "id": "FAF07E73D4C248899055506420B488C3",
+    "name": "PT RPN",
+  },
+  {
+    "id": "CDE3066579004FF8A6C461DE1E2E88A2",
+    "name": "PT SAI GLOBAL Indonesia",
+  },
+  {
+    "id": "E1D5C0A18D0248FCB13897302F1B7450",
+    "name": "PT. Sakata Prima Teknika ",
+  },
+  {
+    "id": "7E11290D4DC74E8D9E895144F3733A35",
+    "name": "PT SAKTIJAYA ARTHA PRATAMA ",
+  },
+  {
+    "id": "E4CE6DCC0B604EE6B98E5A5D711AA4D8",
+    "name": "PT. SALATIGA JAYA MOTOR",
+  },
+  {
+    "id": "1802CF4261EA422AAF3A07306662D156",
+    "name": "PT.SAMATOR GAS INDUSTRI",
+  },
+  {
+    "id": "7210368C702844DB8CEEC2F2186E0ED1",
+    "name": "PT SAMATOR GAS INDUSTRI (CIREBON)",
+  },
+  {
+    "id": "75EF502E202D41B1B215F6492CC99D92",
+    "name": "PT. SAMATOR GAS INDUSTRI (SURABAYA)",
+  },
+  {
+    "id": "8E256392F78041FF85F72BA8FFEB371E",
+    "name": "PT. SAMSUNG SDS GLOBAL SCL Indonesia",
+  },
+  {
+    "id": "FBB9277A4A7F4C32BA152E22B99206CF",
+    "name": "PT. SANKYO SAHABAT INDONESIA",
+  },
+  {
+    "id": "1DB977F9A61444D88F471FE89036F82C",
+    "name": "PT SAPTA KARSA GEMILANG",
+  },
+  {
+    "id": "F4415FC7B083414590789E71CAC0AD31",
+    "name": "PT. Satnetcom Balikpapan ",
+  },
+  {
+    "id": "6C3964DCB5644D269640B5527DE0F760",
+    "name": "PT. SATRIA ANTARAN PRIMA Tbk.I (SAPX)",
+  },
+  {
+    "id": "C07472E0687D4B9F8F60D78A11F35BD0",
+    "name": "PT SAWU INDONESIA",
+  },
+  {
+    "id": "4F93DBFFE24E493F9A2F2EC08AC7671D",
+    "name": "PT SCHENKER PETROLOG UTAMA",
+  },
+  {
+    "id": "054F58DCE4414B45AB32B145E061E0DC",
+    "name": "PT.SEFAS KELIANTAMA",
+  },
+  {
+    "id": "01C76F17443647029F5BE0D631D7CBE4",
+    "name": "PT.SEHATI PRIMA MAKMUR",
+  },
+  {
+    "id": "A85C905CC7C04133A337F9FF5AD1D5DA",
+    "name": "PT.SEJAHTERA BUANA TRADA",
+  },
+  {
+    "id": "E3A74C92BA1B44F08FA438A8C6721275",
+    "name": "PT SELAMAT LESTARI MANDIRI",
+  },
+  {
+    "id": "CD4B78C49A6B4750BB0E6F94DEC4924D",
+    "name": "PT. Sentosa Swadaya Tama",
+  },
+  {
+    "id": "2B21887B8E894FD08FD5496DF59FF579",
+    "name": "PT.Sentral Laharindo Servis",
+  },
+  {
+    "id": "CA0AA8D5E2364A6B971AB3199F7A078C",
+    "name": "PT SentraMitra DayaUtama",
+  },
+  {
+    "id": "7B46BD27FA724B3F9A0C7B00C82C4938",
+    "name": "PT. SERENA JAYA",
+  },
+  {
+    "id": "984DAE2DF9C243F4A47D5001FA9A06C1",
+    "name": "PT Sharp Trading Indonesia",
+  },
+  {
+    "id": "846E93A350274F02BF238C8ADC9CA03A",
+    "name": "PT. SIEMENS GAMESA",
+  },
+  {
+    "id": "46AD918595F44AB797E9E11C338D6BF8",
+    "name": "PT SIGMA ENERGI INDONESIA",
+  },
+  {
+    "id": "F98DCEE8B80D45C0A84E0FB64527AAB1",
+    "name": "PT SIMA GRAHA UTAMA ( HOTEL SANTIKA KELAPA GADING)",
+  },
+  {
+    "id": "EB5C48A27C10474694B6CAFD3E10DC91",
+    "name": "PT SIMOJOYO PUTRA KAROSERI",
+  },
+  {
+    "id": "71FB2B9CA4E04CFD88A7AB28A2E4BA2B",
+    "name": "PT SINAR BUANA",
+  },
+  {
+    "id": "AD4601AE8D674A4BA9B45F264EFF17C9",
+    "name": "PT SINAR CAKRA LAKSANA",
+  },
+  {
+    "id": "7B5020F71C0E4DDCB9C3056D4F15F474",
+    "name": "PT Sinar Jaya",
+  },
+  {
+    "id": "FA05816F04AA41458D09DC9FA3FC87A2",
+    "name": "PT.SINAR JAYA PRIMA LANGGENG",
+  },
+  {
+    "id": "EA0974EF70654BF181773E2B9552975F",
+    "name": "PT SINAR LAUT MANDIRI",
+  },
+  {
+    "id": "A88A368D857E451FAFB960C18E42D8B4",
+    "name": "PT Sinar Sosro-KP Cakung",
+  },
+  {
+    "id": "ED83CE5920334CA8B3566490CA825B8D",
+    "name": "PT. Sinar Sosro-KP Cikarang",
+  },
+  {
+    "id": "91AD0942561249BE8BF649562AADBB6B",
+    "name": "PT.SISIR KATARINDO",
+  },
+  {
+    "id": "4091313C131E496196DAA9928B741956",
+    "name": " PT. SLAMET JAYA SEJAHTERA ",
+  },
+  {
+    "id": "B1FA6AD49F3B496197EA44EC0322A654",
+    "name": "PT. SMART MILENIUM EFFISIENSI",
+  },
+  {
+    "id": "E219BE13BF024B4EBB8F913BC3F443C1",
+    "name": "PT SOFTEX INDONESIA",
+  },
+  {
+    "id": "63ABD976CA734ED09BF882EF6F1A2B4D",
+    "name": "PT. SOLID LOGISTICS",
+  },
+  {
+    "id": "C7FA6E6B7AFE45A9A95DD386E05F3587",
+    "name": "PT. SOLUSI BANGUN BETON",
+  },
+  {
+    "id": "9C7D0733471D4546B6BC1E4A99E3170D",
+    "name": "PT.SOLUSI BANGUN BETON",
+  },
+  {
+    "id": "8571CFE7B5964143B693C28DF3EF0DF8",
+    "name": "PT. SOLUSI BANGUN BETON 1",
+  },
+  {
+    "id": "033A115D2E3142A4A8CEAE980341E72C",
+    "name": "PT. SPANSET INDONESIA",
+  },
+  {
+    "id": "C0A15A9B37494D0381F382AE6FDE5DB0",
+    "name": "PT. SQL",
+  },
+  {
+    "id": "853ABB4883F24630AACE1EFC7902BA39",
+    "name": "PT SRIKANDI DIAMOND CEMERLANG MOTORS",
+  },
+  {
+    "id": "F515ED84777642DC9EF15A181BCBFECA",
+    "name": "PT. SRIWIJAYA SETIA SEJATI",
+  },
+  {
+    "id": "C75AF92339D247068B6254981F07A8EC",
+    "name": "PTSS",
+  },
+  {
+    "id": "1E1C77CCC8F24BA59CBBDC6011C24944",
+    "name": "PT SUKMA GUNA TEKNINDO",
+  },
+  {
+    "id": "E72AFF0B1E6A425391B3417F98C008B3",
+    "name": "PT. SUKUN NIAGA UTAMA",
+  },
+  {
+    "id": "AA9CC94127704CCFB3B231728F9DF2F5",
+    "name": "PT Sumber Alam",
+  },
+  {
+    "id": "0766B654C52942D6B88605C3CDF8A01A",
+    "name": "PT. Sumber Berlian Motors",
+  },
+  {
+    "id": "1644E68C4CFF43ADBCA023E606C7B49B",
+    "name": "PT SUMBER HARAPAN MAKMUR",
+  },
+  {
+    "id": "26B1D1C0F7614ABE8D96D909755AB374",
+    "name": "PT. SUMBER JAYA SEMESTA GROUP",
+  },
+  {
+    "id": "9219A23146E94BBBB7B1489A28EB63F3",
+    "name": "PT. SUMBER MEGA JAYA",
+  },
+  {
+    "id": "E15937B667CC46E9A767A6CF1F97F2BC",
+    "name": "PT SUMBER URIP SEJATI",
+  },
+  {
+    "id": "848055D6B41E45F28DB32588F1F4A17E",
+    "name": "PT. SUMISHO GLOBAL LOGISTICS INDONESIA",
+  },
+  {
+    "id": "448F8B51A5474A58B1AC7C96D6A55673",
+    "name": "PT SUMMARECON HOTELINDO",
+  },
+  {
+    "id": "1003C99AB12B4B9584F40B9595976B8D",
+    "name": "PT Suprabakti Mandiri",
+  },
+  {
+    "id": "0DAF8A29F72E45CF9D2EB3E62C1B5448",
+    "name": "PT SURONO ADY MULYA",
+  },
+  {
+    "id": "A2FADAA684F7429488A6750013837AD9",
+    "name": "PT SUROPATI JAYA ABADI",
+  },
+  {
+    "id": "A4F29AB93CD440349F1C376FEAC692CB",
+    "name": "PT Surveyor Indonesia",
+  },
+  {
+    "id": "FD8D49B7AC364DF4A9732DCCBD52F8BC",
+    "name": "PT. SURYA JAYA BERLIAN",
+  },
+  {
+    "id": "EBD7DEA813544F689F1CED3F53C5F178",
+    "name": "PT   Surya pamenang",
+  },
+  {
+    "id": "38F160942C584673B6BE503C5752530E",
+    "name": "PT.SWABUANA PRATAMA",
+  },
+  {
+    "id": "78EEA7496C354B2A9A4F155C2BD98AC0",
+    "name": "PT Syifa Tbk",
+  },
+  {
+    "id": "A48F96CFC6A84A9FB71B55BB7EFC6A70",
+    "name": "PT. Takari Kokoh Sejahtera",
+  },
+  {
+    "id": "866BD312647949B4BAC535576999DD61",
+    "name": "PT TECHINDOTAMA INTERNASIOANL INDONESIA",
+  },
+  {
+    "id": "BFBB867BA49B457CA78C40DF75F89160",
+    "name": "PT. Telekomunikasi Indonesia",
+  },
+  {
+    "id": "BB4703FA0D81489EA98B764C0A860002",
+    "name": "PT. TELEPLUS COMUNIKASI INDONESIA",
+  },
+  {
+    "id": "8E8A8946D3C9443091619D42DD78C387",
+    "name": "PT. TELKOM INDONESIA",
+  },
+  {
+    "id": "E6C08746EC4E42D880AF60F25AFD6EF5",
+    "name": "PT.TIGA SAUDARA PUTRI",
+  },
+  {
+    "id": "49D6DD0205334888962EAC74B51993B4",
+    "name": "PT TITIAN TELURUSI EKSPRES",
+  },
+  {
+    "id": "CC746CE7A4824227B9F0A0939121D536",
+    "name": "PT. TITIAN TELUSURI EKSPRES",
+  },
+  {
+    "id": "EE96BCE2BCDA44FBAEE49CB9181E2A37",
+    "name": "PT. TNT Skypak International Express",
+  },
+  {
+    "id": "2C28B6443D2E4045AB4006E8CF5369B6",
+    "name": "PT TP",
+  },
+  {
+    "id": "BFB93201FFF24EA2994A7F464D585C6E",
+    "name": "PT TRAKINDO UTAMA",
+  },
+  {
+    "id": "7B2823E584194958B32E8421D56D89F6",
+    "name": "PT. TRAKTOR NUSANTARA",
+  },
+  {
+    "id": "53641883C68C4C75889D62CE7939BCA0",
+    "name": "PT. TRAKTOR NUSANTARA (Non Active)",
+  },
+  {
+    "id": "71067089854A4CCC8B18C0371DDF9175",
+    "name": "PT. TRI DIFTA UTAMA ",
+  },
+  {
+    "id": "A53AAE06D3DE4E859C77417625997013",
+    "name": "PT.TRIMURTI SAKTI",
+  },
+  {
+    "id": "7173D633981A435B908FB6927980EBEC",
+    "name": "PT TUNAS ANTARNUSA MUDA",
+  },
+  {
+    "id": "7BA8120D29214D7381F1310BE45E14FB",
+    "name": "PT. Tunas Mitra Sukses",
+  },
+  {
+    "id": "0A9CF7863DEF40029676C88BC83370AF",
+    "name": "PT UNITED MOTORS CENTRE",
+  },
+  {
+    "id": "35C81123E4B2424596DC1FFEEBE61647",
+    "name": "PT UNITED TRACTORS TBK",
+  },
+  {
+    "id": "7C86350F102B48B487336537E2B2229C",
+    "name": "PT.USAHA LANCAR MANDIRI WAREHOUSE",
+  },
+  {
+    "id": "1E3A2A6DCED74D2E9897E3C2DFB9459B",
+    "name": "PT Vale Indonesia Tbk",
+  },
+  {
+    "id": "01CF15FE32FA463280181226F11546D8",
+    "name": "PT Welani Jaya Sorowako",
+  },
+  {
+    "id": "E456323542A84F42BFB38A7CB6FA132E",
+    "name": "PT.WHITEEAST INDONESIA",
+  },
+  {
+    "id": "B987B1D23C954AA7BF7D83C7C9CF72B1",
+    "name": "PT WICAKSANA BERLIAN MOTOR",
+  },
+  {
+    "id": "74326F2257804F56936A3FCBD34BDD8A",
+    "name": "PT WIJAYA SINAR LESTARI",
+  },
+  {
+    "id": "B28F7BC60FED43EB9F93299B2F322171",
+    "name": "PT.WISHINDO PRATAMA ABADI",
+  },
+  {
+    "id": "75E823827233425AB2A4E8B70D057C98",
+    "name": "PT Yamaha Motor",
+  },
+  {
+    "id": "00CBDCDACDD34442ABB0D3C280AD9101",
+    "name": "PT yasiira indonesia",
+  },
+  {
+    "id": "4716D43533DF4B6099999DDDD3CE3967",
+    "name": "PT. YES LOGISTICS",
+  },
+  {
+    "id": "AC999229D3164794A0A7E726403F6A72",
+    "name": "PT. YONMING INDONESIA",
+  },
+  {
+    "id": "A66C03B476294986A85A4A3E9D9EEFE6",
+    "name": "PT ZAK ANTAR NUSA",
+  },
+]
+
+const debounce = (func, wait) => {
+  let timeout
+  
+  return (...args) => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => func.apply(this, args), wait)
+  }
+}
+
+const assignClientCompanyData = submodule => {
+  if (!submodule.selectedType) {
+    submodule.clientCompanyData = []
+    
+    return
+  }
+
+  switch (submodule.selectedType) {
+  case 'pdtClientId':
+  case 'pliClientId':
+    submodule.clientCompanyData = clientData
+    break
+  case 'pdtCompanyId':
+  case 'pliCompanyId':
+    submodule.clientCompanyData = companyData
+    break
+  default:
+    submodule.clientCompanyData = []
+    break
+  }
+}
+
+const handleClientCompanySelection = async submodule => {
+  if (submodule.selectedClientCompany) {
+    switch (submodule.selectedType) {
+    case 'pdtClientId':
+      submodule.pdtClientId = submodule.selectedClientCompany
+      break
+    case 'pdtCompanyId':
+      submodule.pdtCompanyId = submodule.selectedClientCompany
+      break
+    case 'pliClientId':
+      submodule.pliClientId = submodule.selectedClientCompany
+      break
+    case 'pliCompanyId':
+      submodule.pliCompanyId = submodule.selectedClientCompany
+      break
+    }
+
+    const clientCompanyName = submodule.clientCompanyData.find(
+      item => item.id === submodule.selectedClientCompany,
+    )?.name
+
+    if (clientCompanyName) {
+      submodule.permissions = [
+        {
+          name: clientCompanyName,
+          canCreate: false,
+          canRead: true,
+          canUpdate: false,
+          canDelete: false,
+          canUpload: false,
+          canDownload: false,
+        },
+      ]
+    }
+  } else {
+    // Ensure at least one permission object exists
+    if (submodule.permissions.length === 0) {
+      submodule.permissions = [
+        {
+          name: '',
+          canCreate: false,
+          canRead: true,
+          canUpdate: false,
+          canDelete: false,
+          canUpload: false,
+          canDownload: false,
+        },
+      ]
+    }
+  }
+}
+
+const createNewSubmodule = async () => {
+  const newSubmodule = {
+    name: '',
+    selectedClientCompany: '',
+    selectedType: null,
+    pdtClientId: null,
+    pdtCompanyId: null,
+    pliClientId: null,
+    pliCompanyId: null,
+    permissions: [
+      {
+        name: '',
+        canCreate: false,
+        canRead: true,
+        canUpdate: false,
+        canDelete: false,
+        canUpload: false,
+        canDownload: false,
+      },
+    ],
+    clientCompanyData: [],
+  }
+
+  submodules.value.push(newSubmodule)
+}
+
+onMounted(async () => {
+  if (submodules.value.length === 0) {
+    await createNewSubmodule()
+  } else {
+    for (const submodule of submodules.value) {
+      if (submodule.selectedType && (!submodule.clientCompanyData || submodule.clientCompanyData.length === 0)) {
+        assignClientCompanyData(submodule)
+      }
+      if (submodule.permissions.length === 0) {
+        submodule.permissions = [
+          {
+            name: '',
+            canCreate: false,
+            canRead: true,
+            canUpdate: false,
+            canDelete: false,
+            canUpload: false,
+            canDownload: false,
+          },
+        ]
+      }
+    }
+  }
+})
+
+const addSubmodule = async () => {
+  await createNewSubmodule()
+}
+
+const removeSubmodule = index => {
+  submodules.value.splice(index, 1)
+}
+
+// Computed properties for checkbox binding
+const getPermissionComputed = (submodule, type) => {
+  return computed({
+    get() {
+      const clientCompanyName = submodule.clientCompanyData.find(
+        item => item.id === submodule.selectedClientCompany,
+      )?.name || ''
+
+      const permission = submodule.permissions.find(p => p.name === clientCompanyName)
+      
+      return permission ? permission[type] : false
+    },
+    set(value) {
+      const clientCompanyName = submodule.clientCompanyData.find(
+        item => item.id === submodule.selectedClientCompany,
+      )?.name || ''
+
+      let permission = submodule.permissions.find(p => p.name === clientCompanyName)
+      
+      if (!permission) {
+        permission = { name: clientCompanyName, canCreate: false, canRead: true, canUpdate: false, canDelete: false, canUpload: false, canDownload: false }
+        submodule.permissions.push(permission)
+      }
+      
+      permission[type] = value
+    },
+  })
+}
+
+watch(submodules, debounce(async newSubmodules => {
+  for (const submodule of newSubmodules) {
+    if (submodule.selectedType && (!submodule.clientCompanyData || submodule.clientCompanyData.length === 0)) {
+      assignClientCompanyData(submodule)
+    }
+  }
+}, 300), { deep: true })
+
+watch(submodules, newSubmodules => {
+  const cleanedSubmodules = newSubmodules.map(({ clientCompanyData, ...rest }) => {
+    return { ...rest }
+  })
+
+  emit('update:modelValue', cleanedSubmodules)
+}, { deep: true })
+</script>
+
+<template>
+  <div>
+    <VRow
+      v-for="(submodule, submoduleIndex) in submodules"
+      :key="submoduleIndex"
+    >
+      <VCol cols="12">
+        <VAutocomplete
+          v-model="submodule.name"
+          :items="availableSubmodules"
+          label="Submodule Name"
+          placeholder="Enter or Select Submodule"
+          :rules="[requiredValidator]"
+          append-inner-icon="ri-close-line"
+          @click:append-inner="() => removeSubmodule(submoduleIndex)"
+        />
+      </VCol>
+
+      <VCol cols="12">
+        <VRow>
+          <VCol cols="12">
+            <VRadioGroup
+              v-model="submodule.selectedType"
+              inline
+              @update:model-value="async () => { 
+                assignClientCompanyData(submodule)
+                handleClientCompanySelection(submodule)
+              }"
+            >
+              <VRadio
+                label="PDT Client"
+                value="pdtClientId"
+              />
+              <VRadio
+                label="PDT Company"
+                value="pdtCompanyId"
+              />
+              <VRadio
+                label="PLI Client"
+                value="pliClientId"
+              />
+              <VRadio
+                label="PLI Company"
+                value="pliCompanyId"
+              />
+            </VRadioGroup>
+          </VCol>
+
+          <!-- Conditional display of client/company dropdown -->
+          <VCol
+            v-if="['pdtClientId', 'pdtCompanyId', 'pliClientId', 'pliCompanyId'].includes(submodule.selectedType)"
+            cols="12"
+          >
+            <VAutocomplete
+              v-model="submodule.selectedClientCompany"
+              v-model:search="searchQuery"
+              label="Select Client/Company"
+              :items="submodule.clientCompanyData.slice()"
+              item-title="name"
+              item-value="id"
+              placeholder="Select Client or Company"
+              @update:model-value="() => handleClientCompanySelection(submodule)"
+            />
+          </VCol>
+        </VRow>
+      </VCol>
+
+      <!-- Dynamic CRUD permissions -->
+      <VCol cols="12">
+        <VRow>
+          <VCol cols="3">
+            <VCheckbox
+              :model-value="getPermissionComputed(submodule, 'canCreate').value"
+              label="Create"
+              @update:model-value="value => getPermissionComputed(submodule, 'canCreate').value = value"
+            />
+          </VCol>
+          <VCol cols="3">
+            <VCheckbox
+              :model-value="getPermissionComputed(submodule, 'canRead').value"
+              label="Read"
+              @update:model-value="value => getPermissionComputed(submodule, 'canRead').value = value"
+            />
+          </VCol>
+          <VCol cols="3">
+            <VCheckbox
+              :model-value="getPermissionComputed(submodule, 'canUpdate').value"
+              label="Edit"
+              @update:model-value="value => getPermissionComputed(submodule, 'canUpdate').value = value"
+            />
+          </VCol>
+          <VCol cols="3">
+            <VCheckbox
+              :model-value="getPermissionComputed(submodule, 'canDelete').value"
+              label="Delete"
+              @update:model-value="value => getPermissionComputed(submodule, 'canDelete').value = value"
+            />
+          </VCol>
+          <VCol cols="3">
+            <VCheckbox
+              :model-value="getPermissionComputed(submodule, 'canUpload').value"
+              label="Upload"
+              @update:model-value="value => getPermissionComputed(submodule, 'canUpload').value = value"
+            />
+          </VCol>
+          <VCol cols="3">
+            <VCheckbox
+              :model-value="getPermissionComputed(submodule, 'canDownload').value"
+              label="Download"
+              @update:model-value="value => getPermissionComputed(submodule, 'canDownload').value = value"
+            />
+          </VCol>
+        </VRow>
+      </VCol>
+      <VDivider class="border-dashed" />
+    </VRow>
+
+    <VRow>
+      <VCol cols="12">
+        <VBtn
+          size="small"
+          color="primary"
+          prepend-icon="ri-add-fill"
+          block
+          @click="addSubmodule"
+        >
+          Add Submodule
+        </VBtn>
+      </VCol>
+    </VRow>
+  </div>
+</template>

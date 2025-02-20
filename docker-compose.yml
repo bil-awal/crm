@@ -1,0 +1,11 @@
+version: '3'
+services:
+  nginx:
+    image: registry.pancaran-group.co.id:5000/crmwebapps:1.0.0_dev257
+    container_name: sbox-crmapps
+    ports:
+      - "5174:443"
+    volumes:
+      - ./certs:/etc/nginx/certs
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+    restart: always

@@ -1,0 +1,192 @@
+{
+    "user": {
+        "id": "user-id",
+        "name": "Rustadi",
+        "roles": [
+            {
+                "id": "role-id-1",
+                "name": "Admin Billing Damco",
+                "clients": [
+                    {
+                        "id": "client-id-1",
+                        "name": "PDT",
+                        "modules": [
+                            {
+                                "name": "Dashboard",
+                                "submodules": [
+                                    {
+                                        "name": "Invoice",
+                                        "permissions": [
+                                            "READ"
+                                        ]
+                                    },
+                                    {
+                                        "name": "Tax",
+                                        "permissions": [
+                                            "READ"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Invoice",
+                                "submodules": [
+                                    {
+                                        "name": "Internal",
+                                        "submodules": [
+                                            {
+                                                "name": "Need Confirm",
+                                                "permissions": [
+                                                    "READ",
+                                                    "UPDATE",
+                                                    "DELETE"
+                                                ]
+                                            },
+                                            {
+                                                "name": "Outstanding",
+                                                "permissions": [
+                                                    "READ",
+                                                    "UPDATE",
+                                                    "DELETE"
+                                                ]
+                                            },
+                                            {
+                                                "name": "Paid Off",
+                                                "permissions": [
+                                                    "READ",
+                                                    "UPDATE",
+                                                    "DELETE"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Tax Management",
+                                "submodules": [
+                                    {
+                                        "name": "Calculate Tax",
+                                        "permissions": [
+                                            "READ"
+                                        ]
+                                    },
+                                    {
+                                        "name": "Tax Reporting",
+                                        "permissions": [
+                                            "READ"
+                                        ]
+                                    },
+                                    {
+                                        "name": "Tax Audit",
+                                        "permissions": [
+                                            "READ"
+                                        ]
+                                    },
+                                    {
+                                        "name": "Config",
+                                        "permissions": [
+                                            "READ"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "client-id-2",
+                        "name": "PETRA",
+                        "modules": [
+                            {
+                                "name": "Dashboard",
+                                "submodules": [
+                                    {
+                                        "name": "Invoice",
+                                        "permissions": [
+                                            "READ"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Invoice",
+                                "submodules": [
+                                    {
+                                        "name": "Internal",
+                                        "submodules": [
+                                            {
+                                                "name": "Need Confirm",
+                                                "permissions": [
+                                                    "READ"
+                                                ]
+                                            },
+                                            {
+                                                "name": "Outstanding",
+                                                "permissions": [
+                                                    "READ"
+                                                ]
+                                            },
+                                            {
+                                                "name": "Paid Off",
+                                                "permissions": [
+                                                    "READ"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "companies": [
+                    {
+                        "id": "company-id-1",
+                        "name": "Damco",
+                        "modules": [
+                            {
+                                "name": "Dashboard",
+                                "submodules": [
+                                    {
+                                        "name": "Invoice",
+                                        "permissions": [
+                                            "READ"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Invoice",
+                                "submodules": [
+                                    {
+                                        "name": "External",
+                                        "submodules": [
+                                            {
+                                                "name": "Need Confirm",
+                                                "permissions": [
+                                                    "READ"
+                                                ]
+                                            },
+                                            {
+                                                "name": "Outstanding",
+                                                "permissions": [
+                                                    "READ"
+                                                ]
+                                            },
+                                            {
+                                                "name": "Paid Off",
+                                                "permissions": [
+                                                    "READ"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

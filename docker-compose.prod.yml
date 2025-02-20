@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  crmwebapps:
+    container_name: crmwebapps
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+    image: registry.pancaran-group.co.id:5000/crmwebapps:1.0.0
+    
